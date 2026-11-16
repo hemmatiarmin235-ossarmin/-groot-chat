@@ -10,11 +10,12 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600;800&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#0b0816;--v1:#8b5cf6;--v2:#c026d3;--v3:#4f46e5;--cy:#67e8f9;--tx:#f4f0ff;--mu:#a79fc4;--bd:rgba(255,255,255,.15);--blur:22px;--r:24px}
+:root{--bg:#0b0816;--v1:#8b5cf6;--v2:#c026d3;--cy:#67e8f9;--tx:#f4f0ff;--mu:#a79fc4;--bd:rgba(255,255,255,.15);--blur:22px;--r:24px}
 *{box-sizing:border-box;margin:0;-webkit-tap-highlight-color:transparent}
 [hidden]{display:none!important}
 html,body{height:100%;overflow:hidden;background:var(--bg);color:var(--tx);font:400 15px/1.7 Vazirmatn,Tahoma,sans-serif}
 button,input,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
 :focus-visible{outline:2px solid var(--cy);outline-offset:2px}
 .aurora{position:fixed;inset:0;overflow:hidden;z-index:0;background:radial-gradient(120% 80% at 50% 0,#1a1033,var(--bg))}
 .aurora i{position:absolute;border-radius:50%;filter:blur(80px);opacity:.55;animation:drift 24s ease-in-out infinite alternate}
@@ -25,8 +26,9 @@ button,input,textarea{font:inherit;color:inherit}
 .still .aurora i{animation:none}
 @media(prefers-reduced-motion:reduce){.aurora i,.card{animation:none!important}}
 .glass{background:linear-gradient(145deg,rgba(255,255,255,.13),rgba(255,255,255,.04));-webkit-backdrop-filter:blur(var(--blur)) saturate(170%);backdrop-filter:blur(var(--blur)) saturate(170%);border:1px solid var(--bd);box-shadow:0 14px 44px rgba(6,0,24,.5),inset 0 1px 0 rgba(255,255,255,.2);border-radius:var(--r)}
-#toast{position:fixed;top:14px;left:50%;transform:translate(-50%,-90px);z-index:9;padding:10px 18px;border-radius:99px;background:rgba(30,16,60,.85);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);border:1px solid var(--bd);font-size:14px;max-width:92vw;transition:transform .35s cubic-bezier(.2,.9,.3,1.2)}
+#toast{position:fixed;top:14px;left:50%;transform:translate(-50%,-90px);z-index:9;padding:10px 18px;border-radius:99px;background:rgba(30,16,60,.9);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);border:1px solid var(--bd);font-size:14px;max-width:92vw;transition:transform .35s cubic-bezier(.2,.9,.3,1.2);pointer-events:none}
 #toast.on{transform:translate(-50%,0)}
+
 /* auth */
 #auth{position:fixed;inset:0;z-index:2;display:none;place-items:center;padding:16px;overflow:auto}
 #auth.on{display:grid}
@@ -36,23 +38,28 @@ button,input,textarea{font:inherit;color:inherit}
 .card h1{text-align:center;font-size:26px;font-weight:800;letter-spacing:.07em;background:linear-gradient(90deg,#fff,#d8b4fe);-webkit-background-clip:text;background-clip:text;color:transparent}
 .sub{text-align:center;color:var(--mu);margin-top:-8px}
 .seg{display:grid;grid-template-columns:1fr 1fr;padding:4px;border-radius:17px;background:rgba(0,0,0,.28);border:1px solid var(--bd)}
-.seg button{border:0;background:none;color:var(--mu);padding:8px;border-radius:13px;cursor:pointer;transition:.25s}
+.seg button{border:0;background:none;color:var(--mu);padding:8px;border-radius:13px;transition:.25s}
 .seg .on{background:rgba(255,255,255,.15);color:#fff;box-shadow:inset 0 1px 0 rgba(255,255,255,.25)}
 .fld{display:grid;gap:5px}
-.fld span{font-size:13px;color:var(--mu)}
-.fld input{width:100%;padding:12px 16px;font-size:16px;border-radius:16px;background:rgba(255,255,255,.07);border:1px solid var(--bd);outline:none;text-align:left;transition:.2s}
+.fld>span{font-size:13px;color:var(--mu)}
+.pw{position:relative}
+.pw input{padding-inline-end:52px}
+.fld input{width:100%;padding:12px 16px;font-size:16px;border-radius:16px;background:rgba(255,255,255,.07);border:1px solid var(--bd);outline:none;transition:.2s}
 .fld input:focus,#in:focus{border-color:var(--v1);box-shadow:0 0 0 3px rgba(139,92,246,.35)}
+.eye{position:absolute;top:50%;inset-inline-end:6px;transform:translateY(-50%);width:40px;height:40px;border:0;border-radius:13px;background:none;color:var(--mu);display:grid;place-items:center;transition:.2s}
+.eye:hover{color:#fff;background:rgba(255,255,255,.1)}
 .err{color:#fda4af;font-size:13px;min-height:1.4em}
-.btn{border:0;border-radius:17px;padding:12px 16px;font-weight:600;color:#fff;cursor:pointer;background:linear-gradient(135deg,#8b5cf6,#c026d3);box-shadow:0 10px 30px rgba(139,92,246,.45),inset 0 1px 0 rgba(255,255,255,.35);transition:transform .15s,opacity .2s}
+.btn{border:0;border-radius:17px;padding:12px 16px;font-weight:600;color:#fff;background:linear-gradient(135deg,#8b5cf6,#c026d3);box-shadow:0 10px 30px rgba(139,92,246,.45),inset 0 1px 0 rgba(255,255,255,.35);transition:transform .15s,opacity .2s}
 .btn:active{transform:scale(.98)}
-.btn[disabled]{opacity:.6;cursor:wait}
+.btn:disabled{opacity:.6;cursor:wait}
 .btn.danger{background:rgba(244,63,94,.16);border:1px solid rgba(244,63,94,.4);color:#fecdd3;box-shadow:none}
+
 /* shell */
-#main{position:fixed;top:0;left:0;right:0;height:100%;height:100dvh;z-index:1;display:none;grid-template-columns:82px 340px minmax(0,1fr);grid-template-rows:minmax(0,1fr);gap:14px;padding:max(14px,env(safe-area-inset-top)) max(14px,env(safe-area-inset-right)) max(14px,env(safe-area-inset-bottom)) max(14px,env(safe-area-inset-left))}
+#main{position:fixed;inset:0;z-index:1;display:none;grid-template-columns:82px 340px minmax(0,1fr);grid-template-rows:minmax(0,1fr);gap:14px;padding:max(14px,env(safe-area-inset-top)) max(14px,env(safe-area-inset-right)) max(14px,env(safe-area-inset-bottom)) max(14px,env(safe-area-inset-left))}
 #main.on{display:grid}
 .rail{grid-column:1;display:flex;flex-direction:column;align-items:center;gap:8px;padding:14px 8px}
 .mini{width:44px;height:44px;border-radius:15px;margin-bottom:10px;display:grid;place-items:center;color:#fff;background:linear-gradient(145deg,#c4b5fd,#7c3aed 55%,#c026d3);box-shadow:0 8px 24px rgba(124,58,237,.55),inset 0 1px 0 rgba(255,255,255,.4)}
-.nb{width:58px;padding:9px 0;border-radius:19px;display:grid;justify-items:center;gap:1px;font-size:11px;color:var(--mu);background:none;border:1px solid transparent;cursor:pointer;transition:.25s}
+.nb{width:58px;padding:9px 0;border-radius:19px;display:grid;justify-items:center;gap:1px;font-size:11px;color:var(--mu);background:none;border:1px solid transparent;transition:.25s}
 .nb.on{color:#fff;background:linear-gradient(145deg,rgba(139,92,246,.6),rgba(192,38,211,.35));border-color:rgba(255,255,255,.22);box-shadow:0 0 26px rgba(139,92,246,.55),inset 0 1px 0 rgba(255,255,255,.3)}
 .pane{min-width:0;min-height:0;display:none;flex-direction:column;overflow:hidden}
 .list{grid-column:2}.chat{grid-column:3}
@@ -60,12 +67,13 @@ button,input,textarea{font:inherit;color:inherit}
 [data-v=chats] .list,[data-v=chats] .chat,[data-v=chat] .list,[data-v=chat] .chat,[data-v=profile] .prof,[data-v=settings] .sett{display:flex}
 .hd{display:flex;align-items:center;gap:12px;padding:14px 16px;border-bottom:1px solid var(--bd);flex:none}
 .hd h2{font-size:17px;font-weight:700;line-height:1.4}
-.hd small{display:block;color:var(--mu);font-size:12px;line-height:1.4}
-.back{display:none;width:38px;height:38px;border-radius:13px;border:1px solid var(--bd);background:rgba(255,255,255,.07);cursor:pointer;place-items:center}
+.hd small{display:flex;align-items:center;color:var(--mu);font-size:12px;line-height:1.4}
+.back{display:none;width:38px;height:38px;border-radius:13px;border:1px solid var(--bd);background:rgba(255,255,255,.07);place-items:center}
 .body{flex:1;min-height:0;overflow:auto;padding:18px;display:grid;gap:12px;align-content:start}
 .av{border-radius:35%;display:grid;place-items:center;font-weight:700;color:#fff;flex:none;background:linear-gradient(145deg,hsl(var(--h) 80% 62%),hsl(calc(var(--h) + 30) 75% 44%));box-shadow:inset 0 1px 0 rgba(255,255,255,.35)}
 .room{width:46px;height:46px;border-radius:16px;display:grid;place-items:center;color:#fff;flex:none;background:linear-gradient(145deg,#a78bfa,#7c3aed 55%,#c026d3);box-shadow:inset 0 1px 0 rgba(255,255,255,.4)}
-.li{display:flex;gap:12px;align-items:center;margin:8px;padding:12px;width:calc(100% - 16px);border-radius:19px;border:1px solid var(--bd);background:rgba(255,255,255,.09);cursor:pointer;text-align:start;transition:.2s}
+.scroll{flex:1;min-height:0;overflow:auto}
+.li{display:flex;gap:12px;align-items:center;margin:8px;padding:12px;width:calc(100% - 16px);border-radius:19px;border:1px solid var(--bd);background:rgba(255,255,255,.09);cursor:pointer;text-align:start;transition:.2s;color:inherit}
 .li:hover{background:rgba(255,255,255,.14)}
 .li .t{flex:1;min-width:0}
 .li b{display:flex;justify-content:space-between;gap:8px;font-weight:600}
@@ -73,6 +81,7 @@ button,input,textarea{font:inherit;color:inherit}
 .li p{color:var(--mu);font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-inline-end:6px;background:#4ade80;box-shadow:0 0 10px #4ade80}
 .off .dot{background:#fb7185;box-shadow:0 0 10px #fb7185}
+
 /* messages */
 #msgs{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;padding:16px 14px;display:flex;flex-direction:column;gap:3px}
 .row{display:flex}
@@ -84,12 +93,13 @@ button,input,textarea{font:inherit;color:inherit}
 .bub p{white-space:pre-wrap;overflow-wrap:anywhere}
 .meta{display:flex;justify-content:flex-end;align-items:center;gap:4px;font-size:11px;color:rgba(255,255,255,.62)}
 .stt{display:inline-flex}.stt.fail{color:#fda4af}
-.retry{border:0;background:none;color:#fecdd3;font-size:12px;text-decoration:underline;cursor:pointer}
+.retry{border:0;background:none;color:#fecdd3;font-size:12px;text-decoration:underline;padding:0}
 .empty{margin:auto;text-align:center;color:var(--mu);padding:24px}
 .comp{display:flex;gap:10px;align-items:flex-end;padding:12px;border-top:1px solid var(--bd);flex:none}
 #in{flex:1;resize:none;max-height:140px;padding:11px 18px;font-size:16px;line-height:1.6;border-radius:23px;background:rgba(255,255,255,.08);border:1px solid var(--bd);outline:none;transition:.2s}
-.snd{width:46px;height:46px;border-radius:50%;border:0;flex:none;cursor:pointer;display:grid;place-items:center;color:#fff;background:linear-gradient(135deg,#8b5cf6,#c026d3);box-shadow:0 8px 24px rgba(139,92,246,.5),inset 0 1px 0 rgba(255,255,255,.35)}
+.snd{width:46px;height:46px;border-radius:50%;border:0;flex:none;display:grid;place-items:center;color:#fff;background:linear-gradient(135deg,#8b5cf6,#c026d3);box-shadow:0 8px 24px rgba(139,92,246,.5),inset 0 1px 0 rgba(255,255,255,.35)}
 .snd svg{transform:scaleX(-1)}
+
 /* profile + settings */
 .pf{display:grid;justify-items:center;gap:6px;padding:10px 0 6px;text-align:center}
 .pf h3{font-size:20px;direction:ltr}
@@ -99,12 +109,14 @@ button,input,textarea{font:inherit;color:inherit}
 .set.col{display:grid}
 input[type=range]{width:100%;accent-color:#a78bfa}
 .sw{appearance:none;-webkit-appearance:none;width:48px;height:28px;border-radius:99px;flex:none;position:relative;cursor:pointer;background:rgba(255,255,255,.15);border:1px solid var(--bd);transition:.25s}
-.sw::after{content:"";position:absolute;top:3px;right:3px;width:20px;height:20px;border-radius:50%;background:#fff;transition:.25s}
+.sw::after{content:"";position:absolute;top:3px;inset-inline-end:3px;width:20px;height:20px;border-radius:50%;background:#fff;transition:.25s}
 .sw:checked{background:linear-gradient(135deg,#8b5cf6,#c026d3)}
 .sw:checked::after{transform:translateX(-20px)}
+
 @media(max-width:819px){
  #main{grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,1fr) auto;gap:10px;padding:max(10px,env(safe-area-inset-top)) max(10px,env(safe-area-inset-right)) max(10px,env(safe-area-inset-bottom)) max(10px,env(safe-area-inset-left))}
- .pane{grid-column:1!important;grid-row:1;width:auto!important}
+ .pane{grid-column:1!important;grid-row:1}
+ .prof,.sett{width:100%;justify-self:stretch}
  .rail{grid-column:1;grid-row:2;flex-direction:row;justify-content:space-around;padding:6px}
  .mini{display:none}
  .nb{flex:1;max-width:120px}
@@ -125,12 +137,19 @@ input[type=range]{width:100%;accent-color:#a78bfa}
   <div class="logo" data-ic="chat" data-s="32"></div>
   <h1>GROOT CHAT</h1>
   <p class="sub" id="asub">وارد حساب خود شوید</p>
-  <div class="seg"><button type="button" data-m="login" class="on">ورود</button><button type="button" data-m="register">ثبت‌نام</button></div>
-  <label class="fld"><span>نام کاربری</span><input id="u" autocomplete="username" maxlength="24" autocapitalize="off" spellcheck="false"></label>
-  <label class="fld"><span>رمز عبور</span><input id="p" type="password" autocomplete="current-password" maxlength="128"></label>
-  <label class="fld" id="r2" hidden><span>تکرار رمز عبور</span><input id="p2" type="password" autocomplete="new-password" maxlength="128"></label>
+  <div class="seg" role="group" aria-label="نوع ورود">
+   <button type="button" data-m="login" class="on" aria-pressed="true">ورود</button>
+   <button type="button" data-m="register" aria-pressed="false">ثبت‌نام</button>
+  </div>
+  <label class="fld"><span>نام کاربری</span><input id="u" name="username" autocomplete="username" maxlength="24" autocapitalize="off" autocorrect="off" spellcheck="false" dir="ltr"></label>
+  <label class="fld"><span>رمز عبور</span>
+   <span class="pw"><input id="p" name="password" type="password" autocomplete="current-password" maxlength="128" dir="ltr"><button type="button" class="eye" data-eye="p" aria-label="نمایش رمز عبور" aria-pressed="false"></button></span>
+  </label>
+  <label class="fld" id="r2" hidden><span>تکرار رمز عبور</span>
+   <span class="pw"><input id="p2" name="password_confirm" type="password" autocomplete="new-password" maxlength="128" dir="ltr"><button type="button" class="eye" data-eye="p2" aria-label="نمایش تکرار رمز عبور" aria-pressed="false"></button></span>
+  </label>
   <p class="err" id="ae" role="alert"></p>
-  <button class="btn" id="ab">ورود</button>
+  <button class="btn" id="ab" type="submit">ورود</button>
  </form>
 </main>
 
@@ -144,7 +163,7 @@ input[type=range]{width:100%;accent-color:#a78bfa}
 
  <section class="pane glass list">
   <div class="hd"><h2>گفتگوها</h2></div>
-  <div style="overflow:auto;flex:1;min-height:0">
+  <div class="scroll">
    <button class="li" id="open" type="button">
     <div class="room" data-ic="chat"></div>
     <div class="t"><b>گفتگوی اصلی <small id="lt"></small></b><p id="lp">در حال بارگذاری…</p></div>
@@ -154,22 +173,22 @@ input[type=range]{width:100%;accent-color:#a78bfa}
 
  <section class="pane glass chat" id="chatp">
   <div class="hd">
-   <button class="back" id="bk" aria-label="بازگشت" data-ic="back" data-s="20"></button>
+   <button class="back" id="bk" type="button" aria-label="بازگشت" data-ic="back" data-s="20"></button>
    <div class="room" data-ic="chat"></div>
    <div><h2>گفتگوی اصلی</h2><small><span class="dot"></span><span id="st">متصل</span></small></div>
   </div>
   <div id="msgs" aria-live="polite"></div>
-  <div class="comp">
+  <form class="comp" id="cf">
    <textarea id="in" rows="1" maxlength="4000" placeholder="پیام خود را بنویسید" aria-label="متن پیام"></textarea>
-   <button class="snd" id="sb" aria-label="ارسال" data-ic="send" data-s="20"></button>
-  </div>
+   <button class="snd" id="sb" type="submit" aria-label="ارسال" data-ic="send" data-s="20"></button>
+  </form>
  </section>
 
  <section class="pane glass prof">
   <div class="hd"><h2>پروفایل</h2></div>
   <div class="body">
    <div class="pf" id="pf"></div>
-   <button class="btn danger" id="lo">خروج از حساب</button>
+   <button class="btn danger" id="lo" type="button">خروج از حساب</button>
   </div>
  </section>
 
@@ -178,7 +197,7 @@ input[type=range]{width:100%;accent-color:#a78bfa}
   <div class="body">
    <div class="set col"><div>شدت شیشه مات<small>میزان محو شدن پشت پنل‌ها</small></div><input type="range" id="tb" min="6" max="40" aria-label="شدت شیشه مات"></div>
    <label class="set"><div>پس‌زمینه ساکن<small>خاموش کردن حرکت نورهای پس‌زمینه</small></div><input type="checkbox" class="sw" id="ts"></label>
-   <label class="set"><div>اعلان پیام جدید<small>وقتی صفحه در پس‌زمینه است نمایش داده می‌شود</small></div><input type="checkbox" class="sw" id="tn"></label>
+   <label class="set"><div>اعلان پیام جدید<small>وقتی برنامه در پس‌زمینه است نمایش داده می‌شود</small></div><input type="checkbox" class="sw" id="tn"></label>
   </div>
  </section>
 </div>
@@ -186,32 +205,98 @@ input[type=range]{width:100%;accent-color:#a78bfa}
 <script>
 'use strict';
 const API='https://groot-chat-api.hemmatiarmin235.workers.dev';
-const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
-const IC={chat:'M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z',user:'M20 21a8 8 0 0 0-16 0M12 12a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9z',sliders:'M4 7h9M17 7h3M4 17h3M11 17h9M15 4v6M7 14v6',send:'M22 2 11 13M22 2l-7 20-4-9-9-4 20-7z',back:'M5 12h14M13 6l6 6-6 6',check:'M5 12l5 5L20 7',clock:'M12 7v5l3 2M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18z',alert:'M12 8v5M12 17h.01M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18z'};
+const $=s=>document.querySelector(s);
+const $$=s=>[...document.querySelectorAll(s)];
+
+const IC={
+ chat:'M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z',
+ user:'M20 21a8 8 0 0 0-16 0M12 12a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9z',
+ sliders:'M4 7h9M17 7h3M4 17h3M11 17h9M15 4v6M7 14v6',
+ send:'M22 2 11 13M22 2l-7 20-4-9-9-4 20-7z',
+ back:'M5 12h14M13 6l6 6-6 6',
+ check:'M5 12l5 5L20 7',
+ clock:'M12 7v5l3 2M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18z',
+ alert:'M12 8v5M12 17h.01M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18z',
+ eye:'M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12zM12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6z',
+ eyeOff:'M3 3l18 18M10.6 5.1A9.8 9.8 0 0 1 12 5c6.5 0 10 7 10 7a17 17 0 0 1-3.2 4M6.6 6.6A17 17 0 0 0 2 12s3.5 7 10 7a9.6 9.6 0 0 0 5.4-1.6'
+};
 const ic=(n,s=22)=>`<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="${IC[n]}"/></svg>`;
 $$('[data-ic]').forEach(e=>e.insertAdjacentHTML('afterbegin',ic(e.dataset.ic,+e.dataset.s||24)));
 
-/* Session lives in memory only. Nothing sensitive goes to localStorage. */
-const S={token:null,user:null,msgs:[],pend:[],n:0,sig:'',seen:null,timer:null,mode:'login'};
-let prefs={};try{prefs=JSON.parse(localStorage.getItem('groot.ui')||'{}')}catch{}
+/* Session lives in memory only. Passwords and tokens never go to localStorage. */
+// FIX #1: شمارندهٔ نشست (sess) / FIX #4: مجموعهٔ پیام‌های در حال ارسال (inflight)
+const S={token:null,user:null,sess:0,msgs:[],pend:[],n:0,sig:'',seen:null,timer:null,mode:'login',inflight:new Set()};
+let prefs={};
+try{prefs=JSON.parse(localStorage.getItem('groot.ui')||'{}')||{}}catch{prefs={}}
 const savePrefs=()=>{try{localStorage.setItem('groot.ui',JSON.stringify(prefs))}catch{}};
-const applyPrefs=()=>{document.documentElement.style.setProperty('--blur',(prefs.blur??22)+'px');document.body.classList.toggle('still',!!prefs.still)};
+// FIX #6: اگر prefs.notif روشن است ولی مجوز اعلان granted نیست، هر دو را خاموش کن
+function syncNotif(){
+ if(prefs.notif&&!('Notification' in window&&Notification.permission==='granted')){
+  prefs.notif=false;savePrefs();
+  const c=$('#tn');if(c)c.checked=false;
+ }
+}
+const applyPrefs=()=>{
+ document.documentElement.style.setProperty('--blur',(prefs.blur??22)+'px');
+ document.body.classList.toggle('still',!!prefs.still);
+};
 
-function h(t,a={},...k){const e=document.createElement(t);for(const[n,v]of Object.entries(a))e.setAttribute(n,v);e.append(...k.filter(x=>x!=null&&x!==false));return e}
-function toast(t){const e=$('#toast');e.textContent=t;e.classList.add('on');clearTimeout(toast.t);toast.t=setTimeout(()=>e.classList.remove('on'),3800)}
-const hue=n=>{let x=0;for(const c of String(n))x=(x*31+c.charCodeAt(0))%360;return 250+x%90};
-const av=(n,z)=>h('div',{class:'av',style:`--h:${hue(n)};width:${z}px;height:${z}px;font-size:${Math.round(z*.42)}px`},(String(n)[0]||'?').toUpperCase());
-function tm(v){if(v==null||v==='')return'';let d;if(typeof v==='number')d=new Date(v<1e12?v*1000:v);else{const s=String(v);d=/^\d+$/.test(s)?new Date(+s<1e12?+s*1000:+s):new Date(s.includes('T')||s.includes('Z')?s:s.replace(' ','T')+'Z')}return isNaN(d)?'':d.toLocaleTimeString('fa-IR',{hour:'2-digit',minute:'2-digit'})}
+function h(t,a={},...k){
+ const e=document.createElement(t);
+ for(const[n,v]of Object.entries(a))e.setAttribute(n,v);
+ e.append(...k.filter(x=>x!=null&&x!==false));
+ return e;
+}
+function toast(t){
+ const e=$('#toast');e.textContent=t;e.classList.add('on');
+ clearTimeout(toast.t);toast.t=setTimeout(()=>e.classList.remove('on'),3800);
+}
+// FIX #5: نرمال‌سازی ورودی null/undefined/خالی
+const hue=n=>{const name=(n==null||n==='')?'?':String(n);let x=0;for(const c of name)x=(x*31+c.charCodeAt(0))%360;return 250+x%90};
+const av=(n,z)=>{
+ const name=(n==null||n==='')?'?':String(n);
+ return h('div',{class:'av',style:`--h:${hue(name)};width:${z}px;height:${z}px;font-size:${Math.round(z*.42)}px`},(Array.from(name)[0]||'?').toUpperCase());
+};
+// FIX #12: همهٔ مسیرها برای ورودی نامعتبر '' برمی‌گردانند
+function tm(v){
+ if(v==null||v==='')return'';
+ let d;
+ if(v instanceof Date)d=v;
+ else if(typeof v==='number')d=new Date(v<1e12?v*1000:v);
+ else{
+  const s=String(v).trim();
+  if(!s)return'';
+  if(/^\d+$/.test(s))d=new Date(+s<1e12?+s*1000:+s);
+  else d=new Date(/[TZ]|[+-]\d\d:?\d\d$/.test(s)?s:s.replace(' ','T')+'Z');
+ }
+ if(!d||isNaN(d.getTime()))return'';
+ try{return d.toLocaleTimeString('fa-IR',{hour:'2-digit',minute:'2-digit'})}catch{return''}
+}
 
-/* API layer: every request goes through here */
+/* Single API layer: every request goes through here */
+// FIX #1: خطای مخصوص پاسخ کهنه (نشست/توکن عوض شده)؛ فراخوان‌ها بی‌صدا از آن عبور می‌کنند
+const stale=()=>{const e=new Error('stale');e.stale=true;return e};
 async function api(path,o={}){
+ const sess=S.sess,tok=S.token; // FIX #1: ذخیره قبل از await
  const c=new AbortController(),t=setTimeout(()=>c.abort(),15000);
  try{
-  const r=await fetch(API+path,{method:o.method||'GET',headers:{'Content-Type':'application/json',...(S.token?{Authorization:'Bearer '+S.token}:{})},body:o.body?JSON.stringify(o.body):undefined,signal:c.signal});
-  let d=null;try{d=await r.json()}catch{}
-  if(!r.ok){const e=new Error((d&&(d.error||d.message))||'خطای سرور ('+r.status+')');e.status=r.status;throw e}
+  const r=await fetch(API+path,{
+   method:o.method||'GET',
+   headers:{'Content-Type':'application/json',...(tok?{Authorization:'Bearer '+tok}:{})},
+   body:o.body?JSON.stringify(o.body):undefined,
+   signal:c.signal
+  });
+  let d=null;
+  try{d=await r.json()}catch{}
+  if(S.sess!==sess||S.token!==tok)throw stale(); // FIX #1: پاسخ کهنه، بی‌صدا رد شود
+  if(!r.ok){
+   const e=new Error((d&&(d.error||d.message))||'خطای سرور ('+r.status+')');
+   e.status=r.status;throw e;
+  }
   return d;
  }catch(e){
+  if(e.stale)throw e;
+  if(S.sess!==sess||S.token!==tok)throw stale(); // FIX #1
   if(e.name==='AbortError')throw new Error('سرور پاسخ نداد، دوباره تلاش کنید');
   if(e instanceof TypeError)throw new Error('اتصال به سرور برقرار نشد');
   throw e;
@@ -219,10 +304,14 @@ async function api(path,o={}){
 }
 
 /* Router: one place decides which screen is visible */
+const VIEWS=['chats','chat','profile','settings'];
 function go(v,push=true){
- if(!['chats','chat','profile','settings'].includes(v))v='chats';
+ if(!VIEWS.includes(v))v='chats';
  $('#main').dataset.v=v;
- $$('[data-go]').forEach(b=>b.classList.toggle('on',b.dataset.go===(v==='chat'?'chats':v)));
+ $$('[data-go]').forEach(b=>{
+  const on=b.dataset.go===(v==='chat'?'chats':v);
+  b.classList.toggle('on',on);
+ });
  if(push&&location.hash!=='#'+v)history.pushState(null,'','#'+v);
  if(v==='chat'||v==='chats')requestAnimationFrame(()=>{const m=$('#msgs');m.scrollTop=m.scrollHeight});
 }
@@ -231,35 +320,108 @@ $('#open').onclick=()=>go('chat');
 $('#bk').onclick=()=>go('chats');
 addEventListener('popstate',()=>{if(S.token)go(location.hash.slice(1)||'chats',false)});
 
+/* Password show / hide */
+$$('[data-eye]').forEach(b=>{
+ const inp=$('#'+b.dataset.eye);
+ const paint=show=>{
+  b.innerHTML=ic(show?'eyeOff':'eye',20);
+  b.setAttribute('aria-pressed',String(show));
+  b.setAttribute('aria-label',(show?'پنهان کردن ':'نمایش ')+(b.dataset.eye==='p'?'رمز عبور':'تکرار رمز عبور'));
+ };
+ paint(false);
+ b.onclick=()=>{
+  const show=inp.type==='password';
+  inp.type=show?'text':'password';
+  paint(show);
+  inp.focus({preventScroll:true});
+ };
+});
+function hidePasswords(){
+ $$('[data-eye]').forEach(b=>{
+  $('#'+b.dataset.eye).type='password';
+  b.setAttribute('aria-pressed','false');
+  b.innerHTML=ic('eye',20);
+ });
+}
+
 /* Auth */
-function setMode(m){S.mode=m;$$('.seg button').forEach(b=>b.classList.toggle('on',b.dataset.m===m));$('#r2').hidden=m!=='register';$('#ab').textContent=m==='login'?'ورود':'ساخت حساب';$('#asub').textContent=m==='login'?'وارد حساب خود شوید':'یک حساب تازه بسازید';$('#p').autocomplete=m==='login'?'current-password':'new-password';aerr('')}
+const aerr=t=>{$('#ae').textContent=t};
+function setMode(m){
+ S.mode=m;
+ $$('.seg button').forEach(b=>{
+  const on=b.dataset.m===m;
+  b.classList.toggle('on',on);
+  b.setAttribute('aria-pressed',String(on));
+ });
+ const reg=m==='register';
+ $('#r2').hidden=!reg;
+ if(!reg)$('#p2').value='';
+ $('#ab').textContent=reg?'ساخت حساب':'ورود';
+ $('#asub').textContent=reg?'یک حساب تازه بسازید':'وارد حساب خود شوید';
+ $('#p').autocomplete=reg?'new-password':'current-password';
+ hidePasswords();
+ aerr('');
+}
 $$('.seg button').forEach(b=>b.onclick=()=>setMode(b.dataset.m));
-const aerr=t=>$('#ae').textContent=t;
+
 $('#af').onsubmit=async e=>{
  e.preventDefault();
- const u=$('#u').value.trim(),p=$('#p').value,reg=S.mode==='register';
- const er=!/^[A-Za-z0-9_]{3,24}$/.test(u)?'نام کاربری باید ۳ تا ۲۴ حرف انگلیسی، عدد یا _ باشد':p.length<8?'رمز عبور حداقل ۸ کاراکتر باشد':reg&&p!==$('#p2').value?'تکرار رمز عبور یکسان نیست':'';
- if(er)return aerr(er);
- aerr('');$('#ab').disabled=true;
+ const u=$('#u').value.trim();
+ const p=$('#p').value;
+ const reg=S.mode==='register';
+ let er='';
+ if(!u)er='نام کاربری را وارد کنید';
+ else if(reg&&!/^[A-Za-z0-9_]{3,24}$/.test(u))er='نام کاربری باید ۳ تا ۲۴ حرف انگلیسی، عدد یا _ باشد';
+ else if(!p)er='رمز عبور را وارد کنید';
+ else if(reg&&p.length<8)er='رمز عبور حداقل ۸ کاراکتر باشد';
+ else if(reg&&p!==$('#p2').value)er='تکرار رمز عبور یکسان نیست';
+ if(er){aerr(er);return}
+ aerr('');
+ const btn=$('#ab');
+ btn.disabled=true;
  try{
   if(reg)await api('/api/register',{method:'POST',body:{username:u,password:p}});
   const d=await api('/api/login',{method:'POST',body:{username:u,password:p}});
   const t=d&&(d.token||d.access_token);
   if(!t)throw new Error('پاسخ ورود از سرور نامعتبر است');
-  S.token=t;S.user=(d.user&&d.user.username)||d.username||u;
-  $('#p').value=$('#p2').value='';
+  S.token=t;
+  S.user=(d.user&&d.user.username)||d.username||u;
+  $('#p').value='';$('#p2').value='';
+  hidePasswords();
   enter();
- }catch(x){aerr(x.message)}finally{$('#ab').disabled=false}
+ }catch(x){
+  if(x.stale)return; // FIX #1
+  aerr(x.message);
+ }finally{
+  btn.disabled=false;
+ }
 };
+
 function enter(){
- $('#auth').classList.remove('on');$('#main').classList.add('on');
+ S.sess++; // FIX #1: نشست جدید
+ S.inflight.clear();
+ $('#auth').classList.remove('on');
+ $('#main').classList.add('on');
  $('#pf').replaceChildren(av(S.user,96),h('h3',{},S.user),h('small',{},'نشست فعال در همین دستگاه'));
- history.replaceState(null,'','#chats');go('chats',false);
- S.seen=null;poll();loop();
+ history.replaceState(null,'','#chats');
+ go('chats',false);
+ S.seen=null;
+ poll();
+ loop();
 }
 function logout(msg){
- clearTimeout(S.timer);Object.assign(S,{token:null,user:null,msgs:[],pend:[],sig:'',seen:null});
- $('#main').classList.remove('on');$('#auth').classList.add('on');$('#msgs').replaceChildren();
+ S.sess++; // FIX #1: بی‌اعتبار شدن همهٔ درخواست‌های در جریان
+ clearTimeout(S.timer);
+ S.inflight.clear();
+ Object.assign(S,{token:null,user:null,msgs:[],pend:[],sig:'',seen:null});
+ $('#main').classList.remove('on');
+ $('#auth').classList.add('on');
+ $('#msgs').replaceChildren();
+ $('#lp').textContent='در حال بارگذاری…';
+ $('#lt').textContent='';
+ hidePasswords();
+ setMode('login'); // FIX #10: بازنشانی حالت، متن دکمه و فیلدها
+ aerr(''); // FIX #10: پاک‌سازی خطای احراز هویت
  history.replaceState(null,'',location.pathname);
  if(msg)toast(msg);
 }
@@ -267,79 +429,193 @@ $('#lo').onclick=()=>logout('از حساب خارج شدید');
 
 /* Messages */
 const pick=(o,ks)=>{for(const k of ks)if(o&&o[k]!=null)return o[k]};
-const norm=(m,i)=>({id:pick(m,['id','message_id'])??'i'+i,user:String(pick(m,['username','sender','user','sender_username','from'])??'؟'),text:String(pick(m,['text','content','message','body'])??''),at:pick(m,['created_at','createdAt','timestamp','time','date'])});
+// FIX #2: شمارش پیام‌های هم‌متن خودِ کاربر (برای تطبیق وقتی سرور id برنمی‌گرداند)
+const cnt=(a,t)=>a.reduce((n,x)=>n+(x.user===S.user&&x.text===t?1:0),0);
+// FIX #3: شناسهٔ یکتای کلاینت برای هر پیام
+const newCid=()=>{try{return crypto.randomUUID()}catch{return 'c'+Date.now()+'-'+S.n}};
+const norm=(m,i)=>({
+ cid:pick(m,['client_id','clientId']), // FIX #2/#3: اگر سرور client_id را برگرداند
+ id:pick(m,['id','message_id'])??'i'+i,
+ user:String(pick(m,['username','sender','user','sender_username','from'])??'؟'),
+ text:String(pick(m,['text','content','message','body'])??''),
+ at:pick(m,['created_at','createdAt','timestamp','time','date'])
+});
 function bubble(m){
- const me=m.user===S.user,s=h('span',{class:'meta'},tm(m.at));
- if(me){const i=h('i',{class:'stt '+(m.st||'ok')});i.innerHTML=ic(m.st==='send'?'clock':m.st==='fail'?'alert':'check',13);s.append(i)}
- const b=h('div',{class:'bub'},me?null:h('b',{class:'who',style:`color:hsl(${hue(m.user)} 90% 78%)`},m.user),h('p',{},m.text),s);
- if(m.st==='fail'){const r=h('button',{class:'retry',type:'button'},'ارسال دوباره');r.onclick=()=>send(m);b.append(r)}
+ const me=m.user===S.user;
+ const s=h('span',{class:'meta'},tm(m.at));
+ if(me){
+  const i=h('i',{class:'stt '+(m.st==='fail'?'fail':'')});
+  i.innerHTML=ic(m.st==='send'?'clock':m.st==='fail'?'alert':'check',13);
+  s.append(i);
+ }
+ const b=h('div',{class:'bub'},
+  me?null:h('b',{class:'who',style:`color:hsl(${hue(m.user)} 90% 78%)`},m.user),
+  h('p',{},m.text),s);
+ if(m.st==='fail'){
+  // FIX #11: دکمهٔ retry فقط برای st='fail' (و غیرفعال اگر در حال ارسال است)
+  const r=h('button',{class:'retry',type:'button'},'ارسال دوباره');
+  if(S.inflight.has(m.id))r.disabled=true;
+  r.onclick=()=>retry(m);
+  b.append(r);
+ }
  return h('div',{class:'row'+(me?' me':'')},b);
 }
-function render(force){
- const all=[...S.msgs,...S.pend],sig=all.map(m=>m.id+(m.st||'')).join('|');
+// FIX #11: force = بازسازی اجباری؛ jump = پرش اجباری به پایین (فقط برای ارسال پیام جدید)
+function render(force,jump){
+ const all=[...S.msgs,...S.pend];
+ const sig=all.map(m=>m.id+(m.st||'')+m.text.length+(m.cid||'')).join('|');
  const last=S.msgs[S.msgs.length-1];
- $('#lp').textContent=last?(last.user===S.user?'شما: ':last.user+': ')+last.text.slice(0,70):'هنوز پیامی نیست';
+ $('#lp').textContent=last?((last.user===S.user?'شما: ':last.user+': ')+last.text.slice(0,70)):'هنوز پیامی نیست';
  $('#lt').textContent=last?tm(last.at):'';
- if(sig===S.sig&&!force)return;S.sig=sig;
- const box=$('#msgs'),near=box.scrollHeight-box.scrollTop-box.clientHeight<140;
+ if(sig===S.sig&&!force)return;
+ S.sig=sig;
+ const box=$('#msgs');
+ const near=box.scrollHeight-box.scrollTop-box.clientHeight<140;
+ const top=box.scrollTop;
  box.replaceChildren(...(all.length?all.map(bubble):[h('div',{class:'empty'},'هنوز پیامی نیست. اولین پیام را شما بفرستید.')]));
- if(near||force)box.scrollTop=box.scrollHeight;
+ box.scrollTop=(near||jump)?box.scrollHeight:top; // FIX #11: حفظ موقعیت اسکرول وقتی کاربر بالا است
 }
-function setOnline(v){$('#chatp').classList.toggle('off',!v);$('#st').textContent=v?'متصل':'اتصال برقرار نیست، در حال تلاش دوباره'}
+function setOnline(v){
+ $('#chatp').classList.toggle('off',!v);
+ $('#st').textContent=v?'متصل':'اتصال برقرار نیست، در حال تلاش دوباره';
+}
 function notifyNew(ms){
  const l=ms[ms.length-1];
- if(S.seen!==null&&l&&String(l.id)!==S.seen&&l.user!==S.user&&document.hidden&&prefs.notif&&window.Notification&&Notification.permission==='granted')new Notification(l.user,{body:l.text.slice(0,120)});
- S.seen=l?String(l.id):'';
+ const lid=l?String(l.id):'';
+ if(S.seen!==null&&l&&lid!==S.seen&&l.user!==S.user&&document.hidden&&prefs.notif&&'Notification' in window&&Notification.permission==='granted'){
+  try{new Notification(l.user,{body:l.text.slice(0,120)})}catch{}
+ }
+ S.seen=lid;
 }
 async function poll(){
- if(!S.token)return;
+ const tok=S.token,sess=S.sess; // FIX #1
+ if(!tok)return;
  try{
   const d=await api('/api/messages');
+  if(S.sess!==sess||S.token!==tok)return; // FIX #1
   const a=Array.isArray(d)?d:(d&&(d.messages||d.data||d.results))||[];
   const ms=a.map(norm);
-  if(ms.every(m=>typeof m.id==='number'))ms.sort((x,y)=>x.id-y.id);
-  notifyNew(ms);S.msgs=ms;setOnline(true);render();
+  if(ms.length&&ms.every(m=>typeof m.id==='number'))ms.sort((x,y)=>x.id-y.id);
+  notifyNew(ms);
+  S.msgs=ms;
+  // FIX #2: پیام‌های pending با st='ok' فقط وقتی حذف شوند که در لیست سرور دیده شوند
+  S.pend=S.pend.filter(m=>{
+   if(m.st!=='ok')return true;
+   if(m.cid&&ms.some(x=>x.cid===m.cid))return false;
+   if(m.sid!=null&&ms.some(x=>String(x.id)===String(m.sid)))return false;
+   if(cnt(ms,m.text)>(m.pre||0))return false; // سرور id نداد: تطبیق با user+متن
+   return Date.now()-(m.okAt||0)<60000; // شبکهٔ اطمینان: جلوگیری از ماندن دائمی نسخهٔ تکراری
+  });
+  setOnline(true);
+  render();
  }catch(e){
+  if(e.stale||S.sess!==sess||S.token!==tok)return; // FIX #1
   if(e.status===401)return logout('نشست شما تمام شد، دوباره وارد شوید');
   setOnline(false);
  }
 }
-function loop(){clearTimeout(S.timer);S.timer=setTimeout(async()=>{await poll();if(S.token)loop()},document.hidden?10000:4000)}
+function loop(){
+ clearTimeout(S.timer);
+ const sess=S.sess; // FIX #1
+ // FIX #8: فاصله هنگام زمان‌بندی بر اساس document.hidden محاسبه می‌شود
+ S.timer=setTimeout(async()=>{
+  await poll();
+  if(S.token&&S.sess===sess)loop();
+ },document.hidden?10000:4000);
+}
+// FIX #8: با تغییر visibility فوراً poll و سپس زمان‌بندی با فاصلهٔ درست
+document.addEventListener('visibilitychange',()=>{
+ syncNotif(); // FIX #6
+ if(!S.token)return;
+ clearTimeout(S.timer);
+ if(!document.hidden)poll();
+ loop();
+});
+// FIX #4: قفل اصلی ارسال، S.inflight است (چون retry پیش از فراخوانی send مقدار st='send' را می‌گذارد، چک m.st==='send' اینجا همهٔ ارسال‌ها را مسدود می‌کرد)
 async function send(m){
- m.st='send';render();
+ const tok=S.token,sess=S.sess; // FIX #1
+ if(!tok||m.st==='ok'||S.inflight.has(m.id))return; // FIX #3/#4: قفل ارسال همزمان
+ S.inflight.add(m.id);
+ m.st='send';
+ // FIX #2: تعداد پیام‌های هم‌متن پیش از ارسال (برای تطبیق در poll)
+ m.pre=cnt(S.msgs,m.text)+cnt(S.pend.filter(x=>x!==m&&(x.st==='send'||x.st==='ok')),m.text);
+ render(true);
  try{
-  /* TEMPORARY: field name unverified until the Worker code is reviewed */
-  await api('/api/messages',{method:'POST',body:{text:m.text,content:m.text}});
-  S.pend=S.pend.filter(x=>x!==m);await poll();
+  // FIX #3: client_id یکسان در تلاش مجدد برای deduplicate سمت سرور
+  const r=await api('/api/messages',{method:'POST',body:{text:m.text,client_id:m.cid}});
+  if(S.sess!==sess||S.token!==tok)return; // FIX #1
+  // FIX #2: پیام از pend حذف نمی‌شود؛ تا دیده‌شدن در poll با st='ok' می‌ماند
+  const sid=pick(r||{},['id','message_id']);
+  m.st='ok';
+  m.okAt=Date.now();
+  if(sid!=null)m.sid=sid;
+  render(true);
+  await poll();
  }catch(e){
+  if(e.stale||S.sess!==sess||S.token!==tok)return; // FIX #1
   if(e.status===401)return logout('نشست شما تمام شد، دوباره وارد شوید');
-  m.st='fail';render();toast(e.message);
+  m.st='fail';
+  render(true);
+  toast(e.message);
+ }finally{
+  S.inflight.delete(m.id); // FIX #4
  }
 }
+// FIX #4: کنترل‌کنندهٔ retry با چک اولیه برای جلوگیری از کلیک‌های سریع
+function retry(m){
+ if(m.st==='send'||S.inflight.has(m.id))return;
+ m.st='send';
+ render(true);
+ send(m);
+}
 function post(){
- const t=$('#in').value.trim();if(!t)return;
- const m={id:'p'+(++S.n),user:S.user,text:t,at:Date.now(),st:'send'};
- S.pend.push(m);$('#in').value='';fit();render(true);send(m);
+ const t=$('#in').value.trim();
+ if(!t)return;
+ if(!S.token){toast('برای ارسال پیام ابتدا وارد شوید');return} // FIX #7
+ // FIX #3: هر پیام client_id یکتا دارد
+ const m={id:'p'+(++S.n),cid:newCid(),user:S.user,text:t,at:Date.now(),st:'send'};
+ S.pend.push(m);
+ $('#in').value='';
+ fit();
+ render(true,true); // FIX #11: پرش به پایین فقط برای پیام جدید خودمان
+ send(m);
 }
 const fit=()=>{const i=$('#in');i.style.height='auto';i.style.height=Math.min(i.scrollHeight,140)+'px'};
 $('#in').oninput=fit;
-$('#in').onkeydown=e=>{if(e.key==='Enter'&&!e.shiftKey&&matchMedia('(hover:hover)').matches){e.preventDefault();post()}};
-$('#sb').onclick=post;
-addEventListener('online',()=>{setOnline(true);poll()});
+$('#in').onkeydown=e=>{
+ if(e.key==='Enter'&&!e.shiftKey&&!e.isComposing&&matchMedia('(hover:hover)').matches){
+  e.preventDefault();
+  post();
+ }
+};
+$('#cf').onsubmit=e=>{e.preventDefault();post()};
+addEventListener('online',()=>{poll()}); // FIX #9: وضعیت «متصل» فقط از نتیجهٔ poll تعیین می‌شود
 addEventListener('offline',()=>setOnline(false));
 
 /* Settings */
-$('#tb').value=prefs.blur??22;$('#ts').checked=!!prefs.still;$('#tn').checked=!!prefs.notif&&window.Notification&&Notification.permission==='granted';
+$('#tb').value=prefs.blur??22;
+$('#ts').checked=!!prefs.still;
+syncNotif(); // FIX #6
+$('#tn').checked=!!prefs.notif&&'Notification' in window&&Notification.permission==='granted';
 $('#tb').oninput=e=>{prefs.blur=+e.target.value;applyPrefs();savePrefs()};
 $('#ts').onchange=e=>{prefs.still=e.target.checked;applyPrefs();savePrefs()};
 $('#tn').onchange=async e=>{
  if(e.target.checked){
-  if(!window.Notification){e.target.checked=false;return toast('این مرورگر از اعلان پشتیبانی نمی‌کند')}
-  if(await Notification.requestPermission()!=='granted'){e.target.checked=false;return toast('اجازه نمایش اعلان داده نشد')}
+  if(!('Notification' in window)){
+   e.target.checked=false;toast('این مرورگر از اعلان پشتیبانی نمی‌کند');return;
+  }
+  if(Notification.permission==='denied'){ // FIX #6: پیام روشن‌تر برای مجوز مسدود
+   e.target.checked=false;toast('اجازه اعلان مسدود شده؛ از تنظیمات مرورگر فعال کنید.');return;
+  }
+  if(await Notification.requestPermission()!=='granted'){
+   e.target.checked=false;toast('اجازه نمایش اعلان داده نشد');return;
+  }
  }
- prefs.notif=e.target.checked;savePrefs();
+ prefs.notif=e.target.checked;
+ savePrefs();
 };
 applyPrefs();
+setMode('login');
 </script>
 </body>
 </html>
