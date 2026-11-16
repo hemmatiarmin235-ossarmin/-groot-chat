@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#100d18">
+  <title>GROOT CHAT</title>
+  <style>
+    :root{
+      --bg:#0d0b12;--panel:#15121d;--panel2:#1b1725;--panel3:#241e31;
+      --line:rgba(255,255,255,.075);--text:#f4f0fa;--muted:#a49aaf;
+      --purple:#9b6cff;--purple2:#7545d8;--purple-soft:rgba(155,108,255,.16);
+      --green:#5bd6a0;--danger:#ff6b86;--shadow:0 24px 70px rgba(0,0,0,.35);
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:radial-gradient(ellipse at 78% -10%,rgba(116,69,216,.16),transparent 38%),var(--bg);color:var(--text);font-family:Tahoma,Arial,sans-serif;min-height:100vh}
+    button,input{font:inherit}button{cursor:pointer}
+    .app{height:100vh;min-height:600px;max-width:1600px;margin:auto;padding:18px;display:grid;grid-template-columns:340px minmax(0,1fr);gap:16px}
+    .sidebar,.chat{background:rgba(21,18,29,.92);border:1px solid var(--line);border-radius:22px;overflow:hidden;box-shadow:var(--shadow);min-height:0}
+    .sidebar{display:flex;flex-direction:column}
+    .brand{display:flex;align-items:center;gap:12px;padding:22px 20px 18px}
+    .brand-mark{width:44px;height:44px;border-radius:15px;background:linear-gradient(145deg,#b18aff,#7042d0);display:grid;place-items:center;font-weight:900;font-size:22px;box-shadow:0 8px 28px rgba(155,108,255,.28)}
+    .brand-name{font-size:18px;font-weight:800;letter-spacing:.7px}
+    .brand-sub{font-size:10px;color:var(--muted);margin-top:4px;letter-spacing:1.8px;direction:ltr;text-align:right}
+    .profile{margin:0 14px 16px;padding:12px;background:var(--panel2);border:1px solid var(--line);border-radius:16px;display:flex;align-items:center;gap:10px}
+    .avatar{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;flex:none;color:#fff;font-weight:bold;background:linear-gradient(135deg,#a78bfa,#6336bd)}
+    .avatar.a2{background:linear-gradient(135deg,#f59eaf,#a23b74)}.avatar.a3{background:linear-gradient(135deg,#60a5fa,#3154a5)}.avatar.a4{background:linear-gradient(135deg,#4adeaa,#247b62)}.avatar.a5{background:linear-gradient(135deg,#f5bd65,#a45a27)}
+    .profile-info{min-width:0;flex:1}.profile-info strong{display:block;font-size:13px}.profile-info small{color:var(--green);font-size:11px;display:block;margin-top:5px}
+    .icon-btn{border:0;background:transparent;color:var(--muted);width:36px;height:36px;border-radius:11px;font-size:18px}.icon-btn:hover{background:var(--purple-soft);color:var(--text)}
+    .search-wrap{padding:0 14px 15px;position:relative}
+    .search-wrap input{width:100%;height:43px;background:var(--panel2);border:1px solid var(--line);border-radius:13px;color:var(--text);outline:none;padding:0 42px 0 14px}
+    .search-wrap input:focus{border-color:rgba(155,108,255,.6);box-shadow:0 0 0 3px rgba(155,108,255,.1)}
+    .search-icon{position:absolute;right:28px;top:11px;color:var(--muted)}
+    .section-head{display:flex;align-items:center;justify-content:space-between;padding:4px 19px 10px;color:var(--muted);font-size:11px}
+    .section-head button{border:0;background:var(--purple-soft);color:#c7adff;border-radius:9px;padding:7px 10px;font-size:11px}
+    .chat-list{overflow:auto;padding:0 9px 12px}
+    .chat-item{width:100%;border:1px solid transparent;background:transparent;color:inherit;display:flex;gap:11px;align-items:center;text-align:right;padding:12px 10px;border-radius:15px;margin-bottom:3px}
+    .chat-item:hover{background:rgba(255,255,255,.035)}.chat-item.active{background:var(--purple-soft);border-color:rgba(155,108,255,.18)}
+    .chat-item .avatar{width:45px;height:45px}
+    .chat-meta{flex:1;min-width:0}.chat-top{display:flex;justify-content:space-between;gap:8px;align-items:center}.chat-top strong{font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.chat-top time{font-size:10px;color:var(--muted);white-space:nowrap}
+    .chat-bottom{display:flex;justify-content:space-between;gap:8px;margin-top:7px;align-items:center}.chat-bottom span{font-size:11px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.unread{background:var(--purple2);color:white!important;border-radius:20px;padding:3px 7px;font-size:10px!important}
+    .sidebar-foot{margin-top:auto;padding:13px 17px;border-top:1px solid var(--line);display:flex;justify-content:space-between;color:var(--muted);font-size:10px}
+    .chat{display:flex;flex-direction:column;position:relative;background:linear-gradient(180deg,rgba(21,18,29,.96),rgba(17,14,24,.97))}
+    .chat-header{height:78px;flex:none;display:flex;align-items:center;gap:12px;padding:0 22px;border-bottom:1px solid var(--line);background:rgba(21,18,29,.78)}
+    .chat-header .avatar{width:43px;height:43px}.header-info{flex:1;min-width:0}.header-info strong{font-size:14px}.header-info small{display:block;color:var(--green);font-size:10px;margin-top:5px}
+    .header-actions{display:flex;gap:5px}.mobile-back{display:none}
+    .messages{flex:1;overflow:auto;padding:26px clamp(16px,5vw,76px);display:flex;flex-direction:column;gap:13px;background-image:radial-gradient(rgba(155,108,255,.055) 1px,transparent 1px);background-size:24px 24px}
+    .day-label{align-self:center;font-size:10px;color:#c4b4e6;background:#292139;border:1px solid var(--line);padding:7px 13px;border-radius:20px;margin:2px 0 8px}
+    .message{max-width:min(75%,520px);display:flex;flex-direction:column;gap:5px;align-self:flex-start;animation:pop .18s ease-out}
+    .message.mine{align-self:flex-end}
+    @keyframes pop{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+    .bubble{padding:12px 15px;border-radius:17px 17px 5px 17px;background:#211c2c;border:1px solid var(--line);font-size:13px;line-height:1.9;overflow-wrap:anywhere}
+    .mine .bubble{background:linear-gradient(135deg,#7548c9,#6039a8);border-color:rgba(190,160,255,.15);border-radius:17px 17px 17px 5px}
+    .msg-meta{display:flex;gap:7px;align-items:center;color:#958aa2;font-size:9px;padding:0 5px}.mine .msg-meta{justify-content:flex-end}.ticks{color:#c2a8ff;font-size:12px}
+    .composer-area{padding:14px 22px 18px;border-top:1px solid var(--line);background:rgba(18,15,25,.94)}
+    .composer{display:flex;align-items:center;gap:9px;max-width:950px;margin:auto;background:var(--panel2);border:1px solid var(--line);border-radius:17px;padding:7px}
+    .composer input{flex:1;min-width:0;background:transparent;border:0;outline:0;color:var(--text);padding:11px 9px;font-size:13px}
+    .send-btn{width:43px;height:43px;border:0;border-radius:13px;background:linear-gradient(145deg,#a77aff,#7044cb);color:white;font-size:19px;box-shadow:0 5px 18px rgba(125,75,210,.3)}
+    .send-btn:hover{filter:brightness(1.12);transform:translateY(-1px)}.attach{font-size:19px}
+    .hint{text-align:center;color:#726a7d;font-size:9px;margin-top:10px}
+    .empty{height:100%;display:grid;place-items:center;text-align:center;color:var(--muted)}
+    .empty-card{max-width:300px;padding:25px}.empty-logo{width:76px;height:76px;margin:0 auto 18px;border-radius:25px;background:var(--purple-soft);display:grid;place-items:center;color:#c5aaff;font-size:34px}.empty h2{font-size:17px;color:var(--text)}.empty p{font-size:12px;line-height:2}
+    .toast{position:fixed;bottom:25px;left:50%;transform:translate(-50%,20px);opacity:0;pointer-events:none;background:#292139;border:1px solid rgba(180,145,255,.25);color:#eee6ff;padding:11px 17px;border-radius:12px;font-size:12px;box-shadow:var(--shadow);transition:.25s;z-index:10}.toast.show{opacity:1;transform:translate(-50%,0)}
+    .demo-tag{font-size:9px;color:#d7c4ff;background:rgba(155,108,255,.12);padding:5px 8px;border-radius:8px;margin-right:auto}
+    @media(max-width:760px){
+      .app{height:100dvh;min-height:520px;padding:0;display:block}.sidebar,.chat{height:100dvh;min-height:520px;border-radius:0;border:0}
+      .chat{display:none}.app.chat-open .sidebar{display:none}.app.chat-open .chat{display:flex}
+      .brand{padding-top:18px}.mobile-back{display:inline-grid;place-items:center}
+      .chat-header{height:70px;padding:0 12px}.messages{padding:20px 14px}.message{max-width:88%}.composer-area{padding:10px 10px 13px}.header-actions .optional{display:none}
+    }
+  </style>
+</head>
+<body>
+<div class="app" id="app">
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-mark">G</div>
+      <div><div class="brand-name">GROOT CHAT</div><div class="brand-sub">MESSAGING, REIMAGINED</div></div>
+      <span class="demo-tag">DEMO</span>
+    </div>
+    <div class="profile">
+      <div class="avatar">A</div>
+      <div class="profile-info"><strong>آرمین</strong><small>● آنلاین</small></div>
+      <button class="icon-btn" title="تنظیمات" onclick="notify('تنظیمات در نسخه بعد اضافه می‌شود')">⚙</button>
+    </div>
+    <div class="search-wrap">
+      <span class="search-icon">⌕</span>
+      <input id="search" type="search" placeholder="جستجو در گفتگوها..." autocomplete="off">
+    </div>
+    <div class="section-head"><span>گفتگوها</span><button onclick="notify('ساخت گفتگوی جدید پس از اتصال سرور فعال می‌شود')">＋ گفتگوی جدید</button></div>
+    <div class="chat-list" id="chatList">
+      <button class="chat-item active" data-chat="sara" onclick="openChat('sara')">
+        <div class="avatar a2">س</div><div class="chat-meta"><div class="chat-top"><strong>سارا محمدی</strong><time>۱۴:۳۲</time></div><div class="chat-bottom"><span>فایل طراحی رو دیدی؟</span><span class="unread">۲</span></div></div>
+      </button>
+      <button class="chat-item" data-chat="team" onclick="openChat('team')">
+        <div class="avatar a3">G</div><div class="chat-meta"><div class="chat-top"><strong>تیم GROOT</strong><time>دیروز</time></div><div class="chat-bottom"><span>علی: نسخه جدید آماده شد</span><span class="unread">۵</span></div></div>
+      </button>
+      <button class="chat-item" data-chat="amir" onclick="openChat('amir')">
+        <div class="avatar a4">ا</div><div class="chat-meta"><div class="chat-top"><strong>امیر رضایی</strong><time>دیروز</time></div><div class="chat-bottom"><span>باشه، بعداً صحبت می‌کنیم</span></div></div>
+      </button>
+      <button class="chat-item" data-chat="design" onclick="openChat('design')">
+        <div class="avatar a5">ط</div><div class="chat-meta"><div class="chat-top"><strong>گروه طراحان</strong><time>شنبه</time></div><div class="chat-bottom"><span>✨ یک طرح تازه منتشر شد</span></div></div>
+      </button>
+      <button class="chat-item" data-chat="nima" onclick="openChat('nima')">
+        <div class="avatar">ن</div><div class="chat-meta"><div class="chat-top"><strong>نیما</strong><time>پنجشنبه</time></div><div class="chat-bottom"><span>ممنون بابت کمکت 🙌</span></div></div>
+      </button>
+    </div>
+    <div class="sidebar-foot"><span>GROOT CHAT · نسخه نمایشی</span><span>v0.1.0</span></div>
+  </aside>
+
+  <main class="chat">
+    <header class="chat-header">
+      <button class="icon-btn mobile-back" onclick="backToList()" aria-label="بازگشت">→</button>
+      <div class="avatar a2" id="headAvatar">س</div>
+      <div class="header-info"><strong id="headName">سارا محمدی</strong><small id="headStatus">● آنلاین</small></div>
+      <div class="header-actions">
+        <button class="icon-btn optional" title="جستجو" onclick="focusSearch()">⌕</button>
+        <button class="icon-btn optional" title="تماس" onclick="notify('تماس صوتی در نسخه‌های آینده')">♧</button>
+        <button class="icon-btn" title="اطلاعات گفتگو" onclick="notify('اطلاعات گفتگو')">⋮</button>
+      </div>
+    </header>
+    <section class="messages" id="messages" aria-live="polite">
+      <div class="day-label">امروز</div>
+      <div class="message"><div class="bubble">سلام آرمین! وقت داری طرح جدید GROOT CHAT رو ببینی؟</div><div class="msg-meta"><span>۱۴:۲۸</span></div></div>
+      <div class="message mine"><div class="bubble">سلام! آره، بفرست ببینم 👀</div><div class="msg-meta"><span>۱۴:۳۰</span><span class="ticks">✓✓</span></div></div>
+      <div class="message"><div class="bubble">فایل طراحی رو دیدی؟ سعی کردم ظاهرش ساده و مدرن باشه.</div><div class="msg-meta"><span>۱۴:۳۲</span></div></div>
+    </section>
+    <div class="composer-area">
+      <form class="composer" id="messageForm">
+        <button type="button" class="icon-btn attach" title="پیوست" onclick="notify('ارسال فایل بعد از راه‌اندازی فضای ذخیره‌سازی فعال می‌شود')">＋</button>
+        <input id="messageInput" type="text" placeholder="پیامت را بنویس..." autocomplete="off" maxlength="2000" aria-label="متن پیام">
+        <button class="send-btn" type="submit" title="ارسال پیام" aria-label="ارسال">➤</button>
+      </form>
+      <div class="hint">برای ارسال پیام، کلید Enter را بزنید</div>
+    </div>
+  </main>
+</div>
+<div class="toast" id="toast"></div>
+<script>
+  const chats = {
+    sara:{name:'سارا محمدی',initial:'س',avatar:'a2',status:'● آنلاین',messages:[
+      {text:'سلام آرمین! وقت داری طرح جدید GROOT CHAT رو ببینی؟',mine:false,time:'۱۴:۲۸'},
+      {text:'سلام! آره، بفرست ببینم 👀',mine:true,time:'۱۴:۳۰'},
+      {text:'فایل طراحی رو دیدی؟ سعی کردم ظاهرش ساده و مدرن باشه.',mine:false,time:'۱۴:۳۲'}
+    ]},
+    team:{name:'تیم GROOT',initial:'G',avatar:'a3',status:'۵ عضو',messages:[
+      {text:'سلام به همه! به گروه تیم GROOT خوش اومدید.',mine:false,time:'دیروز'},
+      {text:'علی: نسخه جدید آماده شد',mine:false,time:'دیروز'}
+    ]},
+    amir:{name:'امیر رضایی',initial:'ا',avatar:'a4',status:'آخرین بازدید اخیراً',messages:[
+      {text:'سلام، پروژه چطور پیش میره؟',mine:false,time:'دیروز'},
+      {text:'باشه، بعداً صحبت می‌کنیم',mine:true,time:'دیروز'}
+    ]},
+    design:{name:'گروه طراحان',initial:'ط',avatar:'a5',status:'۱۲ عضو',messages:[
+      {text:'✨ یک طرح تازه منتشر شد',mine:false,time:'شنبه'}
+    ]},
+    nima:{name:'نیما',initial:'ن',avatar:'',status:'آخرین بازدید اخیراً',messages:[
+      {text:'ممنون بابت کمکت 🙌',mine:false,time:'پنجشنبه'}
+    ]}
+  };
+  let current='sara';
+  const app=document.getElementById('app');
+  const messages=document.getElementById('messages');
+  const input=document.getElementById('messageInput');
+  function renderMessages(){
+    const data=chats[current];
+    messages.innerHTML='<div class="day-label">گفتگو</div>';
+    data.messages.forEach(m=>{
+      const wrap=document.createElement('div');wrap.className='message'+(m.mine?' mine':'');
+      const bubble=document.createElement('div');bubble.className='bubble';bubble.textContent=m.text;
+      const meta=document.createElement('div');meta.className='msg-meta';
+      const time=document.createElement('span');time.textContent=m.time;meta.appendChild(time);
+      if(m.mine){const ticks=document.createElement('span');ticks.className='ticks';ticks.textContent='✓';meta.appendChild(ticks)}
+      wrap.append(bubble,meta);messages.appendChild(wrap);
+    });
+    messages.scrollTop=messages.scrollHeight;
+  }
+  function openChat(id){
+    current=id;const d=chats[id];
+    document.getElementById('headName').textContent=d.name;
+    document.getElementById('headStatus').textContent=d.status;
+    const av=document.getElementById('headAvatar');av.textContent=d.initial;av.className='avatar '+d.avatar;
+    document.querySelectorAll('.chat-item').forEach(el=>el.classList.toggle('active',el.dataset.chat===id));
+    renderMessages();app.classList.add('chat-open');input.focus();
+  }
+  function backToList(){app.classList.remove('chat-open')}
+  function notify(text){
+    const toast=document.getElementById('toast');toast.textContent=text;toast.classList.add('show');
+    clearTimeout(window.toastTimer);window.toastTimer=setTimeout(()=>toast.classList.remove('show'),2600);
+  }
+  function focusSearch(){document.getElementById('search').focus()}
+  document.getElementById('messageForm').addEventListener('submit',e=>{
+    e.preventDefault();const text=input.value.trim();if(!text)return;
+    const now=new Date();const time=new Intl.DateTimeFormat('fa-IR',{hour:'2-digit',minute:'2-digit'}).format(now);
+    chats[current].messages.push({text,mine:true,time});input.value='';renderMessages();
+    notify('پیام فقط در همین پیش‌نمایش ثبت شد؛ اتصال سرور هنوز انجام نشده است.');
+  });
+  document.getElementById('search').addEventListener('input',e=>{
+    const q=e.target.value.trim().toLocaleLowerCase('fa');
+    document.querySelectorAll('.chat-item').forEach(el=>{
+      const name=el.querySelector('.chat-top strong').textContent.toLocaleLowerCase('fa');
+      el.style.display=name.includes(q)?'flex':'none';
+    });
+  });
+  renderMessages();
+</script>
+</body>
+</html>
