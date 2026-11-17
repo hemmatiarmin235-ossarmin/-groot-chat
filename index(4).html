@@ -1,0 +1,583 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#f3f4f6">
+<title>GROOT CHAT</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:dark;--bg:#100b1d;--panel:#191329;--panel2:#211936;--line:#342849;--text:#f7f2ff;--muted:#a99dbd;--purple:#9864ff;--pink:#c45bdb;--green:#43d69a;--danger:#ff718b;--radius:18px}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 85% 0,#281947 0,transparent 38%),var(--bg);color:var(--text);font:14px/1.7 Vazirmatn,Tahoma,sans-serif;height:100dvh;overflow:hidden}button,input,textarea{font:inherit;color:inherit}button{cursor:pointer}button:disabled{opacity:.45;cursor:not-allowed}input,textarea{background:#100b1e;border:1px solid var(--line);border-radius:12px;padding:11px 13px;width:100%;outline:none}input:focus,textarea:focus{border-color:var(--purple);box-shadow:0 0 0 3px #9864ff22}.hidden{display:none!important}.muted{color:var(--muted)}.small{font-size:12px}.btn{border:0;border-radius:12px;padding:10px 15px;background:linear-gradient(120deg,var(--purple),var(--pink));font-weight:700}.btn.secondary{background:#302442;border:1px solid var(--line)}.btn.danger{background:#4b2033;color:#ffc0cd}.iconbtn{border:1px solid var(--line);background:#211936;border-radius:12px;padding:9px;display:grid;place-items:center}.auth{height:100%;display:grid;place-items:center;padding:18px}.authbox{width:min(420px,100%);background:#1b1429;border:1px solid var(--line);border-radius:24px;padding:28px;box-shadow:0 24px 80px #0008}.brand{display:flex;align-items:center;gap:12px;font-weight:800;font-size:23px;justify-content:center;margin-bottom:8px}.logo{width:46px;height:46px;border-radius:15px;background:linear-gradient(135deg,#b89aff,#743be8 60%,#d34bc8);display:grid;place-items:center;font-size:24px}.authbox h1{text-align:center;margin:10px 0 0}.authbox p{text-align:center;color:var(--muted);margin:0 0 22px}.tabs{display:flex;background:#100b1e;border-radius:12px;padding:4px;margin-bottom:16px}.tabs button{flex:1;border:0;background:none;padding:8px;border-radius:9px;color:var(--muted)}.tabs button.active{background:#3a2a54;color:white}.field{display:grid;gap:6px;margin:12px 0}.error{color:#ff91a5;min-height:22px;font-size:13px}.app{height:100%;display:grid;grid-template-columns:76px 330px minmax(0,1fr);gap:12px;padding:12px}.rail,.side,.main{background:#191329eF;border:1px solid var(--line);border-radius:20px;min-height:0}.rail{display:flex;flex-direction:column;align-items:center;padding:12px 7px;gap:8px}.rail .logo{margin-bottom:10px}.navbtn{width:58px;min-height:56px;border:1px solid transparent;border-radius:15px;background:none;color:var(--muted);display:grid;place-items:center;gap:0;font-size:11px}.navbtn.active{background:#39285b;color:white;border-color:#60458b}.navbtn span:first-child{font-size:20px}.side{display:flex;flex-direction:column;overflow:hidden}.sidehead,.mainhead{padding:15px 16px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:10px}.sidehead h2,.mainhead h2{margin:0;font-size:17px}.sidebody{padding:12px;overflow:auto;flex:1}.search{margin-bottom:10px}.item{width:100%;text-align:right;border:1px solid transparent;background:transparent;border-radius:14px;padding:11px;display:flex;gap:10px;align-items:center;margin:3px 0}.item:hover,.item.selected{background:#2b2040;border-color:#493566}.avatar{width:42px;height:42px;border-radius:14px;display:grid;place-items:center;background:linear-gradient(135deg,#7654c6,#be57bc);font-weight:800;flex:none}.itemtext{min-width:0;flex:1}.itemtext b{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.itemtext small{color:var(--muted);display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.main{display:flex;flex-direction:column;overflow:hidden}.mainhead{min-height:70px}.mainhead .who{display:flex;align-items:center;gap:10px;min-width:0}.mainhead .who small{display:block;color:var(--muted)}.messages{flex:1;overflow:auto;padding:18px;display:flex;flex-direction:column;gap:9px}.empty{margin:auto;text-align:center;color:var(--muted);padding:25px}.bubble{max-width:min(78%,620px);padding:9px 13px;border-radius:17px;background:#2a213b;border:1px solid #403451;align-self:flex-start;overflow-wrap:anywhere}.bubble.mine{align-self:flex-end;background:linear-gradient(135deg,#6846ae,#8c45a5);border-color:#a67de0}.bubble .sender{font-size:11px;color:#d9c5ff;font-weight:700}.bubble time{display:block;text-align:left;color:#d3c6df;font-size:10px;margin-top:3px}.composer{display:flex;gap:9px;padding:12px;border-top:1px solid var(--line);align-items:end}.composer textarea{resize:none;max-height:130px;min-height:44px;flex:1}.composer .send{height:44px;min-width:48px}.notice{padding:12px;border-radius:13px;background:#2d233d;color:#d8c8ee;margin:10px 0}.panel{padding:18px;overflow:auto}.panel h3{margin:0 0 12px}.row{display:flex;gap:10px;align-items:center}.row>*{min-width:0}.split{display:grid;grid-template-columns:1fr 1fr;gap:10px}.card{background:#211936;border:1px solid var(--line);border-radius:15px;padding:14px;margin:10px 0}.member{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid #332744}.member:last-child{border:0}.member .grow{flex:1;min-width:0}.checkrow{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:9px 0;border-bottom:1px solid #332744}.checkrow input{width:19px;height:19px;accent-color:var(--purple)}.modalback{position:fixed;inset:0;background:#0009;display:grid;place-items:center;padding:15px;z-index:10}.modal{width:min(520px,100%);max-height:90dvh;overflow:auto;background:#1b1429;border:1px solid var(--line);border-radius:20px;padding:18px}.modalhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:#332448;border:1px solid #624b83;border-radius:99px;padding:9px 16px;z-index:20;max-width:90vw;text-align:center}.status{font-size:11px;color:var(--muted)}
+@media(max-width:850px){.app{grid-template-columns:1fr;grid-template-rows:minmax(0,1fr) 64px;padding:7px;gap:7px}.rail{grid-row:2;flex-direction:row;justify-content:space-around;padding:4px}.rail .logo{display:none}.navbtn{width:auto;flex:1;min-height:52px}.side{display:none}.main{grid-row:1}.app[data-view="list"] .main{display:none}.app[data-view="list"] .side{display:flex}.app[data-view="list"] .rail{display:none}.app[data-view="profile"] .side,.app[data-view="settings"] .side{display:none}.app[data-view="profile"] .main,.app[data-view="settings"] .main{display:flex}.app[data-view="chat"] .side{display:none}.app[data-view="chat"] .main{display:flex}.bubble{max-width:88%}}
+
+/* GROOT CHAT mobile-first glass refinement */
+:root{
+ --bg:#090711;--panel:rgba(24,18,39,.66);--panel2:rgba(35,26,54,.58);
+ --line:rgba(202,174,255,.16);--text:#f8f4ff;--muted:#b7abc9;
+ --purple:#9a70ff;--pink:#d16de5;--glass:rgba(26,19,43,.62);
+}
+html,body{width:100%;max-width:100%;min-width:0;height:100%;margin:0;overflow:hidden}
+body{
+ background:radial-gradient(ellipse at 12% 4%,rgba(125,72,207,.25),transparent 36%),
+ radial-gradient(ellipse at 92% 88%,rgba(180,67,180,.14),transparent 34%),#090711;
+ background-attachment:fixed;overscroll-behavior:none;
+}
+button,input,textarea{min-width:0;max-width:100%}
+.auth{min-height:100dvh;height:100dvh;padding:max(16px,env(safe-area-inset-top)) 16px max(16px,env(safe-area-inset-bottom));overflow:auto}
+.authbox,.rail,.side,.main,.modal,.card,.notice,.toast{
+ background:var(--glass)!important;border:1px solid var(--line)!important;
+ -webkit-backdrop-filter:blur(24px) saturate(155%);backdrop-filter:blur(24px) saturate(155%);
+ box-shadow:0 18px 55px rgba(0,0,0,.24),inset 0 1px 0 rgba(255,255,255,.055);
+}
+.authbox{width:min(430px,100%);border-radius:28px;padding:clamp(20px,5vw,32px)}
+.app{width:100%;max-width:100vw;height:100dvh;min-height:0;min-width:0;overflow:hidden;
+ display:grid;grid-template-columns:68px minmax(245px,310px) minmax(0,1fr);gap:10px;
+ padding:10px; padding-top:max(10px,env(safe-area-inset-top));
+ padding-bottom:max(10px,env(safe-area-inset-bottom));
+}
+.rail,.side,.main{min-width:0;min-height:0;border-radius:22px;overflow:hidden}
+.rail{background:rgba(25,18,42,.56)!important}
+.side{background:rgba(23,17,38,.62)!important}
+.main{background:rgba(19,14,32,.56)!important}
+.sidehead,.mainhead,.composer{border-color:var(--line)!important;background:rgba(255,255,255,.018)}
+.sidebody,.messages,.panel{min-width:0;min-height:0;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:rgba(177,139,255,.32) transparent}
+.item{max-width:100%;min-width:0}
+.item:hover,.item.selected,.navbtn.active{background:rgba(139,93,220,.22)!important;border-color:rgba(190,153,255,.25)!important}
+.iconbtn{background:rgba(255,255,255,.055)!important;border-color:var(--line)!important}
+input,textarea{background:rgba(7,5,14,.48)!important;border-color:var(--line)!important;min-width:0}
+.btn{box-shadow:0 7px 22px rgba(129,78,222,.2)}
+.bubble{max-width:min(78%,620px);overflow-wrap:anywhere;word-break:break-word;background:rgba(77,61,103,.42)!important;border-color:rgba(207,182,255,.15)!important;backdrop-filter:blur(12px)}
+.bubble.mine{background:linear-gradient(135deg,rgba(111,73,185,.82),rgba(153,70,169,.78))!important}
+.card{background:rgba(38,28,57,.52)!important}
+.modalback{padding:clamp(10px,3vw,22px);padding-bottom:max(10px,env(safe-area-inset-bottom));background:rgba(3,2,8,.68);backdrop-filter:blur(9px)}
+.modal{width:min(540px,100%);max-height:min(88dvh,850px);border-radius:24px;padding:clamp(14px,4vw,22px);overflow-x:hidden}
+.toast{bottom:max(16px,env(safe-area-inset-bottom));max-width:calc(100vw - 28px);white-space:normal}
+/* Prevent flex/grid children from forcing horizontal overflow */
+.app>* , .main>* , .side>* , .modal>*{min-width:0;max-width:100%}
+@media(max-width:850px){
+ .app{grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,1fr) auto;gap:8px;padding:7px;
+  padding-top:max(7px,env(safe-area-inset-top));padding-bottom:max(7px,env(safe-area-inset-bottom));}
+ .rail{grid-column:1;grid-row:2;display:flex;flex-direction:row;align-items:center;justify-content:flex-start;overflow-x:auto;overflow-y:hidden;scrollbar-width:none;
+  width:100%;height:64px;min-height:64px;padding:5px 8px;gap:5px;border-radius:20px;}
+ .rail::-webkit-scrollbar{display:none}
+ .rail .logo{display:none}
+ .navbtn{width:auto;min-width:68px;min-height:50px;max-height:54px;flex:0 0 auto;padding:4px 8px;border-radius:14px;font-size:10px;line-height:1.25}
+ .navbtn span:first-child{font-size:19px}
+ .side{grid-column:1;grid-row:1;display:none;width:100%;height:100%;border-radius:22px}
+ .main{grid-column:1;grid-row:1;display:flex;width:100%;height:100%;border-radius:22px}
+ .app[data-view="list"] .side{display:flex}
+ .app[data-view="list"] .main{display:none}
+ .app[data-view="list"] .rail{display:none}
+ .app[data-view="chat"] .side{display:none}
+ .app[data-view="chat"] .main{display:flex}
+ .app[data-view="contacts"] .side,.app[data-view="profile"] .side,.app[data-view="settings"] .side{display:none}
+ .app[data-view="contacts"] .main,.app[data-view="profile"] .main,.app[data-view="settings"] .main{display:flex}
+ .mainhead{min-height:64px;padding:10px 12px}
+ .messages{padding:12px 10px;gap:8px}
+ .bubble{max-width:88%;padding:9px 11px}
+ .composer{padding:9px;gap:7px;padding-bottom:max(9px,env(safe-area-inset-bottom))}
+ .composer textarea{min-height:43px;max-height:112px;font-size:14px}
+ .composer .send{min-width:44px;height:43px;padding:8px}
+ .sidehead{padding:12px}
+ .sidebody{padding:9px}
+ .modal{max-height:calc(100dvh - 24px - env(safe-area-inset-top) - env(safe-area-inset-bottom))}
+ .split{grid-template-columns:minmax(0,1fr)}
+}
+@media(max-width:380px){
+ .app{padding:5px;gap:6px}
+ .rail{height:60px;min-height:60px;padding:4px}
+ .navbtn{font-size:9px}
+ .sidehead h2,.mainhead h2{font-size:15px}
+ .avatar{width:38px;height:38px;border-radius:12px}
+ .item{padding:9px;gap:8px}
+ .composer{padding:7px}
+}
+@media(max-height:560px) and (max-width:850px){
+ .rail{height:54px;min-height:54px}
+ .mainhead{min-height:54px}
+ .messages{padding:8px}
+}
+@media(prefers-reduced-motion:no-preference){
+ .rail,.side,.main,.modal,.authbox{animation:glassIn .22s ease-out}
+ .item,.iconbtn,.navbtn,.btn{transition:background .18s ease,border-color .18s ease,transform .18s ease}
+ .iconbtn:active,.navbtn:active,.btn:active{transform:scale(.97)}
+}
+@keyframes glassIn{from{opacity:.86;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+
+
+/* Reference-inspired GROOT CHAT light mobile interface */
+:root{color-scheme:light;--bg:#f1f2f5;--panel:#fff;--line:#eceef2;--text:#202127;--muted:#92969e;--accent:#2799dc;--purple:#2799dc;--radius:24px}
+html,body{background:var(--bg);color:var(--text)}
+body{background:#f1f2f5!important}
+.authbox,.rail,.side,.main,.modal,.card,.notice,.toast{background:#fff!important;border:1px solid #eceef2!important;box-shadow:0 5px 22px rgba(20,28,45,.055)!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+.authbox{border-radius:28px}.logo,.brand-mark{background:linear-gradient(145deg,#39b5ee,#1686ce);color:#fff}
+.btn{background:linear-gradient(135deg,#32a9e9,#168bd0);box-shadow:0 5px 15px #2799dc25;color:#fff}
+input,textarea{background:#f5f6f8!important;border:1px solid #eceef2!important;color:#24262b!important}
+input:focus,textarea:focus{border-color:#7fc6ed!important;box-shadow:0 0 0 3px #2799dc18!important}
+.tabs{background:#f2f3f5}.tabs button.active{background:#dceefa;color:#278bc2}
+.app{background:transparent;grid-template-columns:76px 360px minmax(0,1fr);gap:12px;padding:12px}
+.rail,.side,.main{border-radius:26px;background:#fff!important;border-color:#eceef2!important;box-shadow:0 4px 18px rgba(25,35,55,.045)!important}
+.rail{padding:12px 7px;gap:7px}
+.navbtn{color:#24262b;border-radius:18px;min-height:62px;font-size:11px}
+.navbtn.active{background:#e6f4fc!important;border-color:transparent!important;color:#258fc9}
+.navicon{font-size:23px!important;line-height:1.2}
+.navbtn b{font-size:11px;font-weight:600}
+.side{position:relative;overflow:hidden}
+.sidehead{display:grid;gap:13px;padding:18px 18px 12px;border:0;background:#fff}
+.list-topline{display:flex;align-items:center;gap:11px;min-width:0}
+.brand-mark{width:42px;height:42px;border-radius:15px;display:grid;place-items:center;font-size:20px;font-weight:800;flex:none}
+.list-brand{flex:1;min-width:0}.list-brand b{display:block;font-size:17px;letter-spacing:.3px}.list-brand small{display:flex;align-items:center;gap:6px;color:#2996d0;font-size:12px}
+.online-dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#35bf7a;box-shadow:0 0 0 3px #35bf7a20}
+.top-icon{width:40px;height:40px;border:0;background:transparent;color:#262930;border-radius:13px;font-size:25px;display:grid;place-items:center}
+.top-icon:active{background:#f0f2f5}
+.search-wrap{display:flex;align-items:center;gap:10px;padding:0 15px;height:49px;border-radius:28px;background:#f1f2f4;color:#81858c}
+.search-wrap>span{font-size:25px;line-height:1}
+.search-wrap input.search{border:0!important;box-shadow:none!important;background:transparent!important;padding:0!important;margin:0!important;font-size:14px;height:100%}
+.filter-tabs{display:flex;gap:5px;padding:4px;border-radius:28px;background:#f7f8fa;border:1px solid #eef0f3;overflow-x:auto;scrollbar-width:none}
+.filter-tabs::-webkit-scrollbar{display:none}
+.filter-tabs button{border:0;background:transparent;color:#777d85;border-radius:24px;padding:8px 13px;white-space:nowrap;flex:1;font-weight:600;font-size:13px}
+.filter-tabs button.active{background:#e1f1fb;color:#278ec8}
+.sidebody{padding:8px 10px 95px;scrollbar-width:thin;scrollbar-color:#d8dce2 transparent}
+.item{border:0!important;border-radius:17px!important;padding:12px 9px!important;gap:11px;margin:2px 0!important;min-height:76px;color:#202127;background:transparent!important}
+.item:hover,.item.selected{background:#f3f8fb!important;border-color:transparent!important}
+.avatar{width:54px;height:54px;border-radius:50%;background:linear-gradient(145deg,#b7d9ee,#398dbd);color:white;font-size:20px}
+.group-avatar{background:linear-gradient(145deg,#edc77e,#d78b35)}
+.itemtext{min-width:0;flex:1}.item-title{display:flex;align-items:center;justify-content:space-between;gap:7px}.item-title b{font-size:15px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.item-title small{font-size:11px;color:#9da2a9;white-space:nowrap;flex:none}.itemtext .preview{font-size:13px;color:#89909a;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block;margin-top:4px}
+.unread-count{background:#299bd9;color:#fff;border-radius:20px;min-width:22px;height:22px;padding:0 6px;display:grid;place-items:center;font-size:11px;flex:none}
+.fab-stack{position:absolute;bottom:18px;left:18px;display:grid;gap:10px;z-index:3}
+.fab{width:58px;height:58px;border:0;border-radius:50%;background:#299bdd;color:#fff;box-shadow:0 7px 18px #168bd044;font-size:30px;display:grid;place-items:center}
+.fab-small{width:44px;height:44px;background:#fff;color:#299bdd;border:1px solid #e8edf1;font-size:22px}
+.main{overflow:hidden;background:#fff!important}
+.mainhead{min-height:68px;border-color:#edf0f2;padding:12px 18px}.mainhead h2{font-size:17px;color:#222}.mainhead .who small{color:#8d939b}
+.messages{background:#f8f9fb;padding:18px}.bubble{background:#fff!important;border:1px solid #edf0f2!important;color:#24262b;box-shadow:0 2px 7px #18253808}.bubble.mine{background:#dff1fc!important;border-color:#cce8f7!important;color:#17384a}.bubble time{color:#8e969e}
+.composer{background:#fff;border-color:#edf0f2}.composer textarea{border-radius:24px;background:#f3f5f7!important}.modal{background:#fff!important;color:#25272c;border-radius:22px}.modalhead{border-bottom:1px solid #edf0f2;padding-bottom:10px}.iconbtn{background:#f3f5f7!important;border:1px solid #edf0f2!important;color:#333}
+.panel{padding:14px;background:transparent}.card{border-radius:20px;color:#24262b}.muted,.small,.status{color:#9298a0}.notice{background:#f4f8fb!important;color:#65717c}
+.profile-page,.settings-page{width:min(720px,100%);margin:0 auto;padding:8px 14px 30px;overflow:auto;height:100%;}
+.profile-top-actions{display:flex;align-items:center;justify-content:space-between}.profile-kicker{font-size:13px;color:#9399a1}
+.profile-hero{text-align:center;padding:12px 0 20px}.profile-avatar{width:142px;height:142px;border-radius:50%;display:grid;place-items:center;margin:0 auto 13px;background:linear-gradient(145deg,#b7d8e9,#278dc4);color:#fff;font-size:52px;font-weight:700;box-shadow:0 7px 22px #1a84b82a}.profile-hero h2{font-size:25px;margin:0 0 2px}.online-label{color:#8c9299;margin:0 0 25px}.online-label .online-dot{margin-left:5px}
+.profile-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.profile-action{min-height:82px;border:0;border-radius:24px;background:#fff;box-shadow:0 2px 12px #1c273510;display:grid;align-content:center;justify-items:center;gap:5px;color:#24262b}.profile-action span{font-size:26px}.profile-action b{font-size:13px}
+.profile-info-card{background:#fff;border-radius:25px;padding:7px 20px;margin:12px 0 18px;box-shadow:0 2px 12px #1c273508}.profile-field{padding:13px 0;border-bottom:1px solid #f0f1f3;display:grid;gap:4px}.profile-field:last-child{border:0}.profile-field strong{font-size:17px;font-weight:500;overflow-wrap:anywhere}.profile-field small{font-size:13px;color:#999fa6}.profile-edit-card{background:#fff;border-radius:23px;padding:17px 18px;box-shadow:0 2px 12px #1c273508}.profile-edit-card h3{margin:0 0 12px}.profile-footnote{text-align:center;color:#a3a8af;font-size:11px;padding:15px}
+.settings-page{padding-top:10px}.settings-card{background:#fff;border-radius:25px;padding:6px 14px;box-shadow:0 2px 12px #1c273508}.setting-item{width:100%;border:0;border-bottom:1px solid #f1f2f4;background:transparent;display:flex;align-items:center;gap:13px;text-align:right;padding:13px 3px;min-height:83px;color:#24262b}.setting-item:last-child{border:0}.setting-icon{width:48px;height:48px;border-radius:16px;display:grid;place-items:center;color:#fff;font-size:23px;flex:none}.setting-icon.blue{background:#269cdb}.setting-icon.orange{background:#e6a12a}.setting-icon.green{background:#4dbd68}.setting-icon.red{background:#e65369}.setting-icon.indigo{background:#547fe0}.setting-icon.cyan{background:#1ca4d4}.setting-icon.teal{background:#36b6bf}.setting-icon.purple{background:#8b6ad9}.setting-icon.violet{background:#a76bd4}.setting-copy{flex:1;min-width:0}.setting-copy b{display:block;font-size:17px;font-weight:500}.setting-copy small{display:block;color:#969ca3;font-size:12px;margin-top:3px}.setting-chevron{font-size:24px;color:#c0c4ca}.settings-bottom{display:grid;justify-items:center;gap:8px;padding:20px;color:#a3a8af}.logout-row{border:0;background:transparent;color:#e05267;font-weight:700;padding:8px}
+.settings-modal .field{margin:14px 0}.settings-modal select{width:100%;padding:11px;border:1px solid #e7e9ed;border-radius:12px;background:#f6f7f9;color:#222}
+.dark-theme{--bg:#11121a;--text:#f5f6f8;color-scheme:dark}body.dark-theme{background:#11121a!important;color:#f5f6f8}.dark-theme .side,.dark-theme .main,.dark-theme .rail,.dark-theme .settings-card,.dark-theme .profile-info-card,.dark-theme .profile-edit-card,.dark-theme .profile-action{background:#1c1d28!important;color:#f5f6f8}.dark-theme .item{color:#f5f6f8}.dark-theme .setting-item{color:#f5f6f8}.dark-theme .search-wrap,.dark-theme input,.dark-theme textarea{background:#282a36!important;color:#f5f6f8!important}
+@media(max-width:850px){
+ .app{grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,1fr) 76px;gap:8px;padding:7px;padding-bottom:max(7px,env(safe-area-inset-bottom))}
+ .rail{grid-column:1;grid-row:2;display:flex!important;flex-direction:row;align-items:center;justify-content:space-around;gap:3px;height:72px;min-height:72px;padding:5px 7px;border-radius:38px;box-shadow:0 4px 16px #202c401a!important;overflow:hidden}
+ .navbtn{flex:1;width:auto;min-width:0;min-height:60px;padding:4px 2px;display:grid;justify-items:center;align-content:center;gap:1px;border-radius:28px;font-size:10px}
+ .navbtn.active{background:#e6f4fc!important;color:#268fc8}
+ .navicon{font-size:22px!important}.navsvg{width:23px;height:23px}.navbtn b{font-size:10px;white-space:nowrap}
+ .side{grid-column:1;grid-row:1;display:none;width:100%;height:100%;border-radius:24px}
+ .main{grid-column:1;grid-row:1;display:flex;width:100%;height:100%;border-radius:24px}
+ .app[data-view="list"] .side{display:flex}.app[data-view="list"] .main{display:none}
+ .app[data-view="chat"] .side{display:none}.app[data-view="chat"] .main{display:flex}
+ .app[data-view="contacts"] .side,.app[data-view="profile"] .side,.app[data-view="settings"] .side,.app[data-view="notes"] .side,.app[data-view="space"] .side{display:none}
+ .app[data-view="contacts"] .main,.app[data-view="profile"] .main,.app[data-view="settings"] .main,.app[data-view="notes"] .main,.app[data-view="space"] .main{display:flex}
+ .app[data-view="chat"] .rail{display:none!important}
+ .sidehead{padding:14px 14px 10px;gap:10px}.list-brand b{font-size:15px}.search-wrap{height:45px}.filter-tabs button{padding:7px 10px;font-size:12px}
+ .sidebody{padding:6px 8px 90px}.item{min-height:72px;padding:10px 8px!important}.avatar{width:52px;height:52px}
+ .fab-stack{bottom:14px;left:14px}.fab{width:54px;height:54px}.fab-small{width:42px;height:42px}
+ .profile-page,.settings-page{padding:4px 8px 24px}.profile-avatar{width:126px;height:126px}.profile-hero{padding-top:7px}.profile-hero h2{font-size:23px}.setting-item{min-height:78px}.setting-icon{width:44px;height:44px;border-radius:14px}.setting-copy b{font-size:15px}
+ .mainhead{min-height:58px;padding:9px 12px}.messages{padding:12px 9px}.composer{padding:8px}
+}
+@media(max-width:380px){.navbtn b{font-size:9px}.navicon{font-size:20px!important}.profile-actions{gap:7px}.profile-action{min-height:72px}.setting-item{gap:9px;padding:11px 1px}.setting-copy b{font-size:14px}.setting-copy small{font-size:11px}}
+
+
+/* Final layout details */
+:root{--accent:#2799dc}
+.btn,.fab{background:var(--accent)!important}
+.filter-tabs button.active,.navbtn.active{color:var(--accent)!important}
+.filter-tabs button.active{background:color-mix(in srgb,var(--accent) 13%,white)!important}
+.app[data-view="profile"] .mainhead,.app[data-view="settings"] .mainhead{display:none}
+.settings-topbar{display:flex;align-items:center;justify-content:space-between;padding:2px 4px 12px;color:#262930}
+.settings-topbar b{font-size:16px}.topbar-qr{font-size:26px}
+.settings-account-head{display:flex;align-items:center;gap:14px;padding:8px 8px 18px}
+.settings-account-avatar{width:68px;height:68px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(145deg,#b8dced,#238bc4);color:#fff;font-size:27px;font-weight:700;flex:none}
+.settings-account-head b{display:block;font-size:20px}.settings-account-head small{display:block;color:#969ca3;font-size:13px;margin-top:3px}
+.menu-actions{display:grid;gap:4px}.menu-actions .item{min-height:48px}
+body.dark-theme .settings-topbar,body.dark-theme .profile-page{color:#f5f6f8}
+body.dark-theme .settings-account-head{color:#f5f6f8}
+body.dark-theme .setting-item{border-color:#30313d}
+body.dark-theme .profile-field{border-color:#30313d}
+body.dark-theme .search-wrap{background:#282a36;color:#c4c7ce}
+
+
+@media(max-width:850px){
+ .rail{direction:ltr}
+ .navbtn{direction:rtl}
+ .navicon{font-size:24px!important}.navsvg{width:25px;height:25px;display:block}
+ .navbtn b{font-size:12px}
+ .item-title b{font-size:16px}
+ .item{min-height:78px}
+ .fab.fab-small{background:#fff!important;color:var(--accent)!important;border:1px solid #e8edf1!important}
+}
+@media(max-width:380px){.navbtn b{font-size:10px}.navicon{font-size:22px!important}.navsvg{width:23px;height:23px}}
+
+
+
+/* GROOT CHAT vNext — consistent frosted glass, desktop and mobile */
+:root{
+ --glass-blur:26px;--surface-light:rgba(255,255,255,.70);--surface-dark:rgba(28,29,42,.72);
+ --glass-edge:rgba(255,255,255,.72);--ui-radius:24px;--ui-font:14px;
+}
+html,body{font-size:var(--ui-font)}
+body{background:radial-gradient(ellipse at 12% 8%,rgba(70,174,224,.16),transparent 34%),radial-gradient(ellipse at 88% 90%,rgba(130,108,210,.14),transparent 36%),#eef1f5!important;}
+.authbox,.rail,.side,.main,.modal,.card,.notice,.toast,.profile-info-card,.profile-edit-card,.profile-action,.settings-card,.search-wrap,.filter-tabs{
+ -webkit-backdrop-filter:blur(var(--glass-blur)) saturate(175%)!important;
+ backdrop-filter:blur(var(--glass-blur)) saturate(175%)!important;
+}
+.authbox,.rail,.side,.main,.modal,.card,.notice,.toast,.profile-info-card,.profile-edit-card,.profile-action,.settings-card{
+ background:var(--surface-light)!important;
+ border:1px solid var(--glass-edge)!important;
+ box-shadow:0 14px 42px rgba(32,48,68,.085),inset 0 1px 0 rgba(255,255,255,.72)!important;
+ border-radius:var(--ui-radius);
+}
+.rail{background:rgba(255,255,255,.58)!important}
+.side{background:rgba(255,255,255,.66)!important}
+.main{background:rgba(255,255,255,.62)!important}
+.sidehead,.mainhead,.composer{background:rgba(255,255,255,.34)!important;border-color:rgba(255,255,255,.58)!important}
+.messages{background:rgba(242,246,250,.38)!important}
+.search-wrap,.filter-tabs{background:rgba(236,241,246,.62)!important;border:1px solid rgba(255,255,255,.72)!important}
+.item:hover,.item.selected{background:rgba(221,239,250,.58)!important}
+.bubble{backdrop-filter:blur(15px) saturate(150%)!important;-webkit-backdrop-filter:blur(15px) saturate(150%)!important}
+input,textarea,.settings-modal select{border-radius:calc(var(--ui-radius)*.55)!important}
+.btn,.fab,.navbtn,.iconbtn,.profile-action,.setting-item{transition:transform .18s ease,background .2s ease,box-shadow .2s ease,border-color .2s ease}
+.btn:hover,.fab:hover,.profile-action:hover{transform:translateY(-1px);box-shadow:0 10px 24px rgba(39,153,220,.18)}
+.app{width:100%;max-width:100vw;min-width:0;height:100dvh;min-height:0;grid-template-columns:78px minmax(285px,360px) minmax(0,1fr);gap:14px;padding:clamp(12px,1.35vw,22px);}
+.rail,.side,.main{min-width:0;min-height:0;border-radius:26px}
+.rail{gap:9px;padding:14px 8px}
+.navbtn{min-height:64px;border-radius:19px}
+.sidehead{padding:20px 18px 13px}
+.sidebody{padding:10px 12px 100px}
+.mainhead{min-height:72px}
+.messages{padding:clamp(14px,2vw,26px)}
+
+.app-back{display:none;position:fixed;z-index:30;top:max(12px,env(safe-area-inset-top));left:max(12px,env(safe-area-inset-left));width:44px;height:44px;border-radius:50%;place-items:center;border:1px solid rgba(255,255,255,.8);color:#27313c;background:rgba(255,255,255,.66);box-shadow:0 8px 24px rgba(22,42,62,.14),inset 0 1px 0 #fff;-webkit-backdrop-filter:blur(24px) saturate(180%);backdrop-filter:blur(24px) saturate(180%);cursor:pointer}
+.app:not(.hidden):not([data-view="list"])+.app-back{display:grid}
+.app-back:active{transform:scale(.94)}
+
+body.dark-theme{background:radial-gradient(ellipse at 12% 8%,rgba(104,75,180,.22),transparent 36%),radial-gradient(ellipse at 88% 90%,rgba(34,119,158,.12),transparent 34%),#10111a!important;color:#f4f5fa!important}
+body.dark-theme .authbox,body.dark-theme .rail,body.dark-theme .side,body.dark-theme .main,body.dark-theme .modal,body.dark-theme .card,body.dark-theme .notice,body.dark-theme .toast,body.dark-theme .profile-info-card,body.dark-theme .profile-edit-card,body.dark-theme .profile-action,body.dark-theme .settings-card{
+ background:var(--surface-dark)!important;border-color:rgba(255,255,255,.13)!important;box-shadow:0 16px 48px rgba(0,0,0,.24),inset 0 1px 0 rgba(255,255,255,.07)!important;color:#f4f5fa!important;
+}
+body.dark-theme .sidehead,body.dark-theme .mainhead,body.dark-theme .composer,body.dark-theme .messages{background:rgba(17,18,28,.24)!important;border-color:rgba(255,255,255,.1)!important}
+body.dark-theme .search-wrap,body.dark-theme .filter-tabs{background:rgba(255,255,255,.07)!important;border-color:rgba(255,255,255,.1)!important;color:#d4d8e2}
+body.dark-theme .item,body.dark-theme .setting-item,body.dark-theme .profile-field,body.dark-theme .profile-action{color:#f4f5fa!important;border-color:rgba(255,255,255,.09)!important}
+body.dark-theme .item:hover,body.dark-theme .item.selected{background:rgba(255,255,255,.09)!important}
+body.dark-theme input,body.dark-theme textarea,body.dark-theme .settings-modal select{background:rgba(5,7,14,.38)!important;color:#f4f5fa!important;border-color:rgba(255,255,255,.14)!important}
+body.dark-theme .app-back{background:rgba(32,34,48,.76);color:#f4f5fa;border-color:rgba(255,255,255,.16)}
+body[data-wallpaper="sky"]{background:radial-gradient(ellipse at 10% 0,rgba(69,177,229,.25),transparent 42%),#eaf2f8!important}
+body[data-wallpaper="lavender"]{background:radial-gradient(ellipse at 90% 0,rgba(167,139,250,.24),transparent 42%),#f1eef8!important}
+body[data-wallpaper="mint"]{background:radial-gradient(ellipse at 10% 0,rgba(91,190,151,.22),transparent 42%),#edf5f1!important}
+body[data-wallpaper="plain"]{background:#edf0f4!important}
+body.dark-theme[data-wallpaper]{background:radial-gradient(ellipse at 10% 0,rgba(112,92,180,.18),transparent 42%),#10111a!important}
+body.compact-ui .item{min-height:60px!important;padding:8px!important}
+body.compact-ui .setting-item{min-height:64px!important;padding:9px 3px!important}
+body.compact-ui .sidebody{padding-top:5px}
+body.no-motion *,body.no-motion *::before,body.no-motion *::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+
+@media(min-width:851px){
+ .app{grid-template-columns:82px minmax(300px,370px) minmax(0,1fr);gap:16px;padding:16px}
+ .rail,.side,.main{height:calc(100dvh - 32px)}
+ .mainhead{padding:15px 20px}
+ .messages{padding:24px clamp(20px,3vw,44px)}
+ .bubble{max-width:min(68%,700px)}
+ .profile-page,.settings-page{width:min(820px,100%);padding:18px 28px 40px}
+ .profile-avatar{width:154px;height:154px}
+ .settings-card,.profile-info-card{padding-inline:22px}
+ .app-back{top:22px;left:22px}
+}
+@media(min-width:1450px){.app{grid-template-columns:88px 390px minmax(0,1fr);gap:18px;padding:20px}.rail,.side,.main{height:calc(100dvh - 40px)}}
+@media(max-width:850px){
+ .app{grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,1fr) 76px;gap:8px;padding:7px;padding-top:max(7px,env(safe-area-inset-top));padding-bottom:max(7px,env(safe-area-inset-bottom))}
+ .rail{height:72px;min-height:72px;border-radius:38px;background:rgba(255,255,255,.72)!important}
+ .side,.main{height:100%;border-radius:24px}
+ .app-back{top:max(12px,env(safe-area-inset-top));left:max(12px,env(safe-area-inset-left));width:40px;height:40px}
+ .app[data-view="chat"] .mainhead{padding-left:58px}
+ .profile-top-actions{padding-left:48px}
+ .settings-topbar{padding-left:48px}
+}
+@media(max-width:380px){.app{padding:5px;gap:6px}.rail{height:66px;min-height:66px}.app-back{width:38px;height:38px}}
+
+
+.appearance-controls .range-field>span{display:flex;justify-content:space-between;gap:12px;color:#59616b}
+.appearance-controls input[type="range"]{accent-color:var(--accent);padding:0;background:transparent!important;border:0!important;box-shadow:none!important}
+.appearance-controls select{width:100%;padding:11px;border:1px solid #e7e9ed;border-radius:12px;background:rgba(245,247,250,.8);color:#25272c}
+.appearance-preview{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px;border-radius:16px;background:rgba(120,150,180,.08);color:var(--text)}
+.preview-glass{display:grid;gap:2px;padding:12px 18px;border:1px solid rgba(255,255,255,.8);border-radius:16px;background:rgba(255,255,255,.58);backdrop-filter:blur(20px);box-shadow:0 8px 22px rgba(30,50,70,.08);font-weight:700}
+.preview-glass small{font-weight:400;color:#7f8992}
+body.dark-theme .appearance-controls .range-field>span,body.dark-theme .appearance-preview{color:#e9eaf0}
+body.dark-theme .appearance-controls select{background:rgba(5,7,14,.45);color:#f4f5fa;border-color:rgba(255,255,255,.14)}
+body.dark-theme .preview-glass{background:rgba(35,37,52,.62);color:#f4f5fa;border-color:rgba(255,255,255,.15)}
+@media(max-width:850px){.app[data-view="list"] .rail{display:flex!important}}
+
+</style>
+</head>
+<body>
+<section id="auth" class="auth"><form id="authForm" class="authbox"><div class="brand"><div class="logo">G</div> GROOT CHAT</div><h1 id="authTitle">ورود به حساب</h1><p>پیام‌رسان شخصی شما</p><div class="tabs"><button type="button" id="loginTab" class="active">ورود</button><button type="button" id="registerTab">ثبت‌نام</button></div><label class="field">نام کاربری<input id="username" autocomplete="username" maxlength="24" dir="ltr" required></label><label class="field">رمز عبور<input id="password" type="password" autocomplete="current-password" maxlength="128" required></label><label id="confirmField" class="field hidden">تکرار رمز عبور<input id="confirmPassword" type="password" maxlength="128"></label><div id="authError" class="error"></div><button id="authSubmit" class="btn" style="width:100%">ورود</button></form></section>
+<div id="app" class="app hidden" data-view="list">
+ <nav class="rail" aria-label="ناوبری اصلی">
+  <button class="navbtn active" data-view="list" aria-label="گفتگوها"><span class="navicon"><svg class="navsvg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.5 8.5 0 0 1-8.5 8.5 9 9 0 0 1-4-.9L3 21l1.9-4.9a9 9 0 0 1-.9-4.1A8.5 8.5 0 0 1 12.5 3h.5a8.5 8.5 0 0 1 8 8v.5Z"/><path d="M8 10h8M8 14h5"/></svg></span><b>گفتگوها</b></button>
+  <button class="navbtn" data-view="contacts" aria-label="مخاطبین"><span class="navicon"><svg class="navsvg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg></span><b>مخاطبین</b></button>
+  <button class="navbtn" data-view="settings" aria-label="تنظیمات"><span class="navicon"><svg class="navsvg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1-1.7 2.9-.2-.1a1.7 1.7 0 0 0-1.9.1l-.2.1h-3.4l-.1-.2a1.7 1.7 0 0 0-1.6-1.1 1.7 1.7 0 0 0-1 .3l-.2.1-2.9-1.7.1-.2a1.7 1.7 0 0 0-.1-1.9l-.1-.2v-3.4l.2-.1a1.7 1.7 0 0 0 1.1-1.6 1.7 1.7 0 0 0-.3-1l-.1-.2 1.7-2.9.2.1a1.7 1.7 0 0 0 1.9-.1l.2-.1h3.4l.1.2a1.7 1.7 0 0 0 1.6 1.1 1.7 1.7 0 0 0 1-.3l.2-.1 2.9 1.7-.1.2a1.7 1.7 0 0 0 .1 1.9l.1.2v3.4z"/></svg></span><b>تنظیمات</b></button>
+  <button class="navbtn" data-view="profile" aria-label="پروفایل"><span class="navicon" id="navProfileAvatar">G</span><b>پروفایل</b></button>
+ </nav>
+ <aside class="side">
+  <div class="sidehead">
+   <div class="list-topline"><div class="brand-mark">G</div><div class="list-brand"><b>GROOT CHAT</b><small><i class="online-dot"></i> پیام‌رسان شما</small></div><button class="top-icon" id="refreshList" title="بروزرسانی">⟳</button><button class="top-icon" id="moreChats" title="گزینه‌ها">⋮</button></div>
+   <label class="search-wrap"><span>⌕</span><input id="chatSearch" class="search" placeholder="جست‌وجوی گفتگوها" autocomplete="off"></label>
+   <div class="filter-tabs" role="tablist" aria-label="فیلتر گفتگوها"><button class="active" data-chat-filter="all">همه گفتگوها</button><button data-chat-filter="private">خصوصی</button><button data-chat-filter="group">گروه‌ها</button></div>
+  </div>
+  <div class="sidebody"><div id="chatList"><div class="empty">در حال بارگذاری گفتگوها…</div></div></div>
+  <div class="fab-stack"><button class="fab fab-small" id="newGroup" title="ساخت گروه"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.4-3.4 2.6-5.2 6.5-5.2s6.1 1.8 6.5 5.2M16 5.5a3.2 3.2 0 0 1 0 6.2M17 15c2.7.5 4.1 2.1 4.5 5"/></svg></button><button class="fab" id="newPrivate" title="گفتگوی جدید">＋</button></div>
+ </aside>
+ <main class="main"><header class="mainhead"><div class="who"><div class="avatar" id="currentAvatar">G</div><div><h2 id="mainTitle">GROOT CHAT</h2><small id="mainSub">یک گفتگو را انتخاب کنید</small></div></div><div class="row"><button class="iconbtn" id="groupInfo" title="اطلاعات گروه" hidden>ⓘ</button><button class="iconbtn" id="refreshChat">↻</button></div></header><section id="mainContent" class="messages"><div class="empty">از دکمه + برای شروع گفتگوی خصوصی یا ساخت گروه استفاده کنید.</div></section><form id="composer" class="composer hidden"><textarea id="messageInput" rows="1" placeholder="پیام بنویسید…" maxlength="4000"></textarea><button class="btn send" type="submit">➤</button></form></main>
+</div>
+<button id="appBack" class="app-back" type="button" aria-label="بازگشت" title="بازگشت">
+ <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
+</button>
+<div id="modalRoot"></div><div id="toast" class="toast hidden"></div>
+<script>
+'use strict';
+const API='https://groot-chat-api.hemmatiarmin235.workers.dev';
+const $=s=>document.querySelector(s); const $$=s=>[...document.querySelectorAll(s)]; const readNotes=()=>{try{const v=JSON.parse(localStorage.getItem('groot.notes')||'[]');return Array.isArray(v)?v:[]}catch{return[]}}; const state={token:localStorage.getItem('groot.token')||'',user:null,chats:[],active:null,mode:'login',poll:null,group:null,notes:readNotes(),chatFilter:'all'};
+const defaultAppearance={accent:'#2799dc',theme:'light',opacity:70,blur:26,font:14,radius:24,wallpaper:'plain',density:'normal',motion:true};
+let appearance=(()=>{try{const saved=JSON.parse(localStorage.getItem('groot.appearance')||'{}');return {...defaultAppearance,accent:localStorage.getItem('groot.accent')||defaultAppearance.accent,theme:localStorage.getItem('groot.theme')||defaultAppearance.theme,...saved}}catch{return {...defaultAppearance}}})();
+function applyAppearance(){
+ const a=appearance,alpha=Math.max(.25,Math.min(.94,Number(a.opacity||70)/100));
+ document.documentElement.style.setProperty('--accent',a.accent||defaultAppearance.accent);
+ document.documentElement.style.setProperty('--purple',a.accent||defaultAppearance.accent);
+ document.documentElement.style.setProperty('--glass-blur',Math.max(6,Math.min(40,Number(a.blur)||26))+'px');
+ document.documentElement.style.setProperty('--ui-radius',Math.max(12,Math.min(34,Number(a.radius)||24))+'px');
+ document.documentElement.style.setProperty('--ui-font',Math.max(12,Math.min(19,Number(a.font)||14))+'px');
+ document.documentElement.style.setProperty('--surface-light',`rgba(255,255,255,${alpha})`);
+ document.documentElement.style.setProperty('--surface-dark',`rgba(28,29,42,${Math.min(.96,alpha+.08)})`);
+ document.body.classList.toggle('dark-theme',a.theme==='dark');
+ document.body.classList.toggle('compact-ui',a.density==='compact');
+ document.body.classList.toggle('no-motion',a.motion===false);
+ document.body.dataset.wallpaper=a.wallpaper||'plain';
+ try{localStorage.setItem('groot.appearance',JSON.stringify(a));localStorage.setItem('groot.accent',a.accent||defaultAppearance.accent);localStorage.setItem('groot.theme',a.theme||'light')}catch{}
+}
+applyAppearance();
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function toast(s){const e=$('#toast');e.textContent=s;e.classList.remove('hidden');clearTimeout(toast.t);toast.t=setTimeout(()=>e.classList.add('hidden'),3200)}
+async function api(path,options={}){
+ const method=String(options.method||'GET').toUpperCase();
+ const isPublicAuth=(path==='/api/login'||path==='/api/register')&&method==='POST'&&!state.token;
+ const headers={...(options.body?{'Content-Type':isPublicAuth?'text/plain;charset=UTF-8':'application/json'}:{}),...(!isPublicAuth&&state.token?{Authorization:'Bearer '+state.token}:{})};
+ let r;
+ try{
+  r=await fetch(API+path,{method,headers,body:options.body?JSON.stringify(options.body):undefined,mode:'cors',credentials:'omit',cache:'no-store',redirect:'follow'});
+ }catch(err){
+  const e=new Error('اتصال به سرور برقرار نشد. اینترنت، آدرس سایت و دسترسی مرورگر به Cloudflare را بررسی کن. ('+(err&&err.message?err.message:'NetworkError')+')');
+  e.network=true;throw e;
+ }
+ let d={};const raw=await r.text();if(raw){try{d=JSON.parse(raw)}catch{d={detail:raw.slice(0,240)}}}
+ if(!r.ok){const e=new Error(d.error||d.message||d.detail||('خطای سرور '+r.status));e.status=r.status;throw e}
+ return d;
+}
+function authMode(mode){state.mode=mode;$('#loginTab').classList.toggle('active',mode==='login');$('#registerTab').classList.toggle('active',mode==='register');$('#confirmField').classList.toggle('hidden',mode!=='register');$('#authTitle').textContent=mode==='login'?'ورود به حساب':'ساخت حساب جدید';$('#authSubmit').textContent=mode==='login'?'ورود':'ثبت‌نام';$('#authError').textContent=''}
+$('#loginTab').onclick=()=>authMode('login');$('#registerTab').onclick=()=>authMode('register');
+$('#authForm').onsubmit=async e=>{e.preventDefault();const username=$('#username').value.trim(),password=$('#password').value;if(!/^[A-Za-z0-9_]{3,24}$/.test(username)){ $('#authError').textContent='نام کاربری باید ۳ تا ۲۴ حرف انگلیسی، عدد یا _ باشد';return}if(password.length<8){$('#authError').textContent='رمز عبور باید حداقل ۸ کاراکتر باشد';return}if(state.mode==='register'&&password!==$('#confirmPassword').value){$('#authError').textContent='تکرار رمز عبور یکسان نیست';return}const b=$('#authSubmit');b.disabled=true;try{if(state.mode==='register')await api('/api/register',{method:'POST',body:{username,password}});const d=await api('/api/login',{method:'POST',body:{username,password}});state.token=d.token;state.user=d.user;localStorage.setItem('groot.token',state.token);await startApp()}catch(x){$('#authError').textContent=x.message||'خطای نامشخص در ورود';if(x.network)console.warn('GROOT CHAT network error:',x)}finally{b.disabled=false}};
+async function startApp(){const d=await api('/api/me');state.user=d.user;state.user.display_name=d.profile?.display_name||state.user.username;$('#auth').classList.add('hidden');$('#app').classList.remove('hidden');$('#currentAvatar').textContent=(state.user.username||'G')[0].toUpperCase();$('#navProfileAvatar').textContent=(state.user.username||'G')[0].toUpperCase();initAppHistory();await loadChats();await showProfile();clearInterval(state.poll);state.poll=setInterval(()=>{if(state.active)loadMessages(state.active.id,true);loadChats()},4500)}
+const APP_VIEWS=['list','chat','contacts','profile','settings','notes','space'];
+let appHistoryReady=false;
+let appViewStack=['list'];
+function applyView(v){
+ if(!APP_VIEWS.includes(v))v='list';
+ $('#app').dataset.view=v;
+ document.querySelectorAll('.navbtn').forEach(b=>b.classList.toggle('active',b.dataset.view===v));
+ if(v==='contacts')showContacts();
+ if(v==='profile')showProfile();
+ if(v==='settings')showSettings();
+ if(v==='notes')showNotes();
+ if(v==='space')showSpace();
+}
+function view(v,options={}){
+ if(!APP_VIEWS.includes(v))v='list';
+ const current=$('#app').dataset.view||'list';
+ if(v==='list'){
+  appViewStack=['list'];
+ }else if(options.root){
+  appViewStack=['list',v];
+ }else if(current!==v){
+  appViewStack=appViewStack.filter((item,index)=>index===0||item!==v);
+  appViewStack.push(v);
+ }
+ applyView(v);
+}
+function initAppHistory(){
+ appHistoryReady=true;
+ appViewStack=['list'];
+ try{
+  const url=location.pathname+location.search+'#groot-chat';
+  history.replaceState({grootApp:true,grootGuard:true},'',url);
+  history.pushState({grootApp:true,grootGuard:true},'',url);
+ }catch{}
+}
+function backInApp(){
+ if($('#modalRoot').innerHTML.trim()){closeModal();return}
+ const current=$('#app').dataset.view||'list';
+ if(appViewStack.length>1){
+  appViewStack.pop();
+  applyView(appViewStack[appViewStack.length-1]||'list');
+  return;
+ }
+ if(current!=='list'){
+  appViewStack=['list'];
+  applyView('list');
+  return;
+ }
+ toast('در صفحه اصلی هستید؛ برای خروج از حساب از تنظیمات استفاده کنید');
+}
+function restoreHistoryGuard(){
+ if(!appHistoryReady||!state.token||$('#app').classList.contains('hidden'))return;
+ try{
+  const v=$('#app').dataset.view||'list';
+  history.pushState({grootApp:true,grootGuard:true},'',location.pathname+location.search+'#groot-'+v);
+ }catch{}
+}
+$('#appBack').onclick=backInApp;
+window.addEventListener('popstate',()=>{
+ if(!state.token||$('#app').classList.contains('hidden'))return;
+ if($('#modalRoot').innerHTML.trim())closeModal(true);
+ else backInApp();
+ restoreHistoryGuard();
+});
+window.addEventListener('keydown',e=>{
+ if(e.key==='Escape'){
+  if($('#modalRoot').innerHTML.trim())closeModal();
+  else if(!$('#app').classList.contains('hidden')&&($('#app').dataset.view||'list')!=='list')backInApp();
+ }
+});
+document.querySelectorAll('.navbtn').forEach(b=>b.onclick=()=>view(b.dataset.view,{root:true}));
+async function loadChats(){try{const d=await api('/api/chats');state.chats=d.chats||[];renderChats()}catch(e){if(e.status===401)logout();else toast(e.message)}}
+function renderChats(){
+ const q=$('#chatSearch').value.trim().toLowerCase();
+ const list=state.chats.filter(c=>{
+  const title=(c.title||c.other_username||'گفتگو').toLowerCase();
+  const type=c.type==='group'?'group':'private';
+  return title.includes(q)&&(state.chatFilter==='all'||state.chatFilter===type);
+ });
+ $('#chatList').innerHTML=list.length?list.map(c=>{
+  const title=c.title||c.other_username||'گفتگوی خصوصی';
+  const preview=c.last_message|| (c.type==='group'?'گروه':'گفتگوی خصوصی');
+  const avatar=(c.type==='group'?'گ':(c.other_username||title||'?')[0]).toString().slice(0,1).toUpperCase();
+  const stamp=c.last_message_at||c.updated_at||c.created_at;
+  const time=stamp?fmt(stamp):'';
+  const unread=Number(c.unread_count||0);
+  return `<button class="item ${state.active?.id===c.id?'selected':''}" data-chat="${esc(c.id)}"><div class="avatar ${c.type==='group'?'group-avatar':''}">${esc(avatar)}</div><div class="itemtext"><div class="item-title"><b>${esc(title)}</b><small>${esc(time)}</small></div><small class="preview">${esc(preview)}</small></div>${unread?`<span class="unread-count">${unread>99?'99+':unread}</span>`:''}</button>`;
+ }).join(''):'<div class="empty empty-list">گفتگویی برای نمایش وجود ندارد.</div>';
+ document.querySelectorAll('[data-chat]').forEach(b=>b.onclick=()=>openChat(b.dataset.chat));
+}
+$$('[data-chat-filter]').forEach(b=>b.onclick=()=>{state.chatFilter=b.dataset.chatFilter;$$('[data-chat-filter]').forEach(x=>x.classList.toggle('active',x===b));renderChats()});
+async function openChat(id){const c=state.chats.find(x=>x.id===id);if(!c)return;state.active=c;state.group=c.type==='group'?id:null;$('#mainTitle').textContent=c.title||c.other_username||'گفتگوی خصوصی';$('#mainSub').textContent=c.type==='group'?'گروه':'گفتگوی خصوصی';$('#composer').classList.remove('hidden');$('#groupInfo').hidden=c.type!=='group';$('#mainContent').innerHTML='<div class="empty">در حال دریافت پیام‌ها…</div>';view('chat');renderChats();await loadMessages(id)}
+function fmt(s){if(!s)return'';const d=new Date(s);return isNaN(d)?'':d.toLocaleTimeString('fa-IR',{hour:'2-digit',minute:'2-digit'})}
+async function loadMessages(id,silent=false){if(!id)return;try{const d=await api('/api/chats/'+encodeURIComponent(id)+'/messages');if(state.active?.id!==id)return;const box=$('#mainContent');const near=box.scrollHeight-box.scrollTop-box.clientHeight<130;const msgs=d.messages||[];box.innerHTML=msgs.length?msgs.map(m=>`<article class="bubble ${m.sender_id===state.user.id?'mine':''}">${m.sender_id===state.user.id?'':`<div class="sender">${esc(m.username)}</div>`}<div>${esc(m.body)}</div><time>${fmt(m.created_at)}</time></article>`).join(''):'<div class="empty">هنوز پیامی ارسال نشده است.</div>';if(near||!silent)box.scrollTop=box.scrollHeight}catch(e){if(!silent)toast(e.message)}}
+$('#composer').onsubmit=async e=>{e.preventDefault();if(!state.active)return;const input=$('#messageInput'),text=input.value.trim();if(!text)return;input.value='';try{await api('/api/chats/'+encodeURIComponent(state.active.id)+'/messages',{method:'POST',body:{text,client_id:crypto.randomUUID()}});await loadMessages(state.active.id);await loadChats()}catch(e){input.value=text;toast(e.message)}};
+$('#messageInput').onkeydown=e=>{if(e.key==='Enter'&&!e.shiftKey&&!e.isComposing){e.preventDefault();$('#composer').requestSubmit()}};
+const refreshNow=()=>{loadChats();if(state.active)loadMessages(state.active.id)};$('#refreshList').onclick=refreshNow;$('#refreshChat').onclick=refreshNow;
+function modal(title,content){
+ $('#modalRoot').innerHTML=`<div class="modalback" id="modalBack"><section class="modal"><div class="modalhead"><b>${title}</b><button class="iconbtn" id="closeModal" type="button">✕</button></div>${content}</section></div>`;
+ $('#closeModal').onclick=()=>closeModal();
+ $('#modalBack').onclick=e=>{if(e.target.id==='modalBack')closeModal()};
+}
+function closeModal(){
+ $('#modalRoot').innerHTML='';
+}
+$('#newPrivate').onclick=()=>{modal('شروع گفتگوی خصوصی',`<label class="field">شناسه کاربر<input id="targetUsername" placeholder="مثلاً armin_dev" dir="ltr"></label><button class="btn" id="startPrivate">شروع گفتگو</button><div id="searchResults"></div>`);$('#targetUsername').oninput=async e=>{const q=e.target.value.trim();if(q.length<2){$('#searchResults').innerHTML='';return}try{const d=await api('/api/users/search?q='+encodeURIComponent(q));$('#searchResults').innerHTML=(d.users||[]).map(u=>`<button class="item" data-user="${esc(u.username)}"><div class="avatar">${esc(u.username[0].toUpperCase())}</div><div class="itemtext"><b>${esc(u.display_name)}</b><small>@${esc(u.username)}</small></div></button>`).join('');document.querySelectorAll('[data-user]').forEach(b=>b.onclick=()=>{$('#targetUsername').value=b.dataset.user})}catch(x){toast(x.message)}};$('#startPrivate').onclick=async()=>{try{const d=await api('/api/chats/private',{method:'POST',body:{username:$('#targetUsername').value.trim()}});closeModal();await loadChats();await openChat(d.chat_id)}catch(e){toast(e.message)}}};
+$('#newGroup').onclick=()=>{modal('ساخت گروه جدید',`<label class="field">نام گروه<input id="groupTitle" maxlength="80" placeholder="نام گروه"></label><label class="field">توضیحات<textarea id="groupDescription" maxlength="500" rows="3" placeholder="توضیحات گروه"></textarea></label><button class="btn" id="createGroup">ساخت گروه</button>`);$('#createGroup').onclick=async()=>{try{const d=await api('/api/groups',{method:'POST',body:{title:$('#groupTitle').value,description:$('#groupDescription').value}});closeModal();await loadChats();await openChat(d.group.id);toast('گروه ساخته شد')}catch(e){toast(e.message)}}};
+$('#moreChats').onclick=()=>{modal('گزینه‌های گفتگوها',`<div class="menu-actions"><button class="item" data-more-action="new-private">شروع گفتگوی خصوصی</button><button class="item" data-more-action="new-group">ساخت گروه جدید</button><button class="item" data-more-action="contacts">مخاطبین</button><button class="item" data-more-action="settings">تنظیمات</button></div>`);document.querySelectorAll('[data-more-action]').forEach(b=>b.onclick=()=>{const a=b.dataset.moreAction;closeModal();if(a==='new-private')$('#newPrivate').click();if(a==='new-group')$('#newGroup').click();if(a==='contacts')view('contacts',{root:true});if(a==='settings')view('settings',{root:true})})};
+$('#groupInfo').onclick=()=>state.active&&showGroupInfo(state.active.id);
+async function showGroupInfo(id){try{const d=await api('/api/groups/'+id);const g=d.group,members=d.members||[];const owner=d.my_role==='owner';modal('مدیریت گروه',`<div class="card"><h3>${esc(g.title)}</h3><p class="muted">${esc(g.description||'بدون توضیحات')}</p><small>${members.length} عضو</small></div><h3>افزودن عضو</h3><div class="row"><input id="addMemberName" placeholder="شناسه کاربر" dir="ltr"><button class="btn" id="addMemberBtn">افزودن</button></div><h3 style="margin-top:18px">اعضا و مدیران</h3><div id="membersList">${members.map(m=>`<div class="member"><div class="avatar">${esc(m.username[0].toUpperCase())}</div><div class="grow"><b>${esc(m.display_name||m.username)}</b><div class="small muted">@${esc(m.username)} · ${esc(m.role)}</div></div>${owner&&m.role!=='owner'?`<button class="btn secondary" data-admin="${esc(m.id)}">${m.role==='admin'?'دسترسی مدیر':'مدیر کردن'}</button>`:''}</div>`).join('')}</div><h3 style="margin-top:18px">تنظیمات گروه</h3><div id="groupSettings"></div><button class="btn" id="saveGroupSettings">ذخیره تنظیمات</button>`);
+$('#addMemberBtn').onclick=async()=>{try{await api('/api/groups/'+id+'/members',{method:'POST',body:{username:$('#addMemberName').value.trim()}});toast('عضو اضافه شد');closeModal();showGroupInfo(id)}catch(e){toast(e.message)}};
+document.querySelectorAll('[data-admin]').forEach(b=>b.onclick=()=>adminEditor(id,b.dataset.admin));
+const settings=g.settings||{};const keys=[['allow_text','ارسال پیام متنی'],['allow_photos','ارسال عکس'],['allow_videos','ارسال ویدیو'],['allow_audio','ارسال صوت'],['allow_files','ارسال فایل'],['allow_links','ارسال لینک'],['history_visible','نمایش تاریخچه برای اعضای جدید'],['show_members','نمایش فهرست اعضا']];$('#groupSettings').innerHTML=keys.map(([k,label])=>`<label class="checkrow">${label}<input type="checkbox" data-setting="${k}" ${settings[k]!==false?'checked':''}></label>`).join('');$('#saveGroupSettings').onclick=async()=>{const next={...settings};document.querySelectorAll('[data-setting]').forEach(x=>next[x.dataset.setting]=x.checked);try{await api('/api/groups/'+id,{method:'PATCH',body:{settings:next}});toast('تنظیمات ذخیره شد');closeModal()}catch(e){toast(e.message)}};
+}catch(e){toast(e.message)}}
+async function adminEditor(groupId,userId){const all={add_members:'افزودن اعضا',remove_members:'حذف اعضا',ban_members:'مسدودکردن اعضا',send_messages:'ارسال پیام',send_media:'ارسال رسانه',pin_messages:'سنجاق پیام',delete_messages:'حذف پیام دیگران',manage_info:'تغییر اطلاعات گروه',manage_invites:'مدیریت لینک دعوت',manage_settings:'تغییر تنظیمات',manage_admins:'مدیریت مدیران',manage_polls:'مدیریت نظرسنجی'};modal('دسترسی‌های مدیر',`<div id="permList">${Object.entries(all).map(([k,v])=>`<label class="checkrow">${v}<input type="checkbox" data-perm="${k}" ${['send_messages','send_media'].includes(k)?'checked':''}></label>`).join('')}</div><button class="btn" id="savePerms">ذخیره دسترسی‌ها</button><button class="btn danger" id="removeAdmin" style="margin-right:8px">لغو مدیریت</button>`);$('#savePerms').onclick=async()=>{const permissions={};document.querySelectorAll('[data-perm]').forEach(x=>permissions[x.dataset.perm]=x.checked);try{await api('/api/groups/'+groupId+'/roles',{method:'PUT',body:{user_id:userId,role:'admin',permissions}});toast('دسترسی مدیر ذخیره شد');closeModal()}catch(e){toast(e.message)}};$('#removeAdmin').onclick=async()=>{try{await api('/api/groups/'+groupId+'/roles',{method:'PUT',body:{user_id:userId,role:'member',permissions:{}}});toast('مدیریت لغو شد');closeModal()}catch(e){toast(e.message)}}}
+async function showContacts(){try{const d=await api('/api/contacts');$('#mainTitle').textContent='مخاطبین';$('#mainSub').textContent='فهرست مخاطبین شما';$('#composer').classList.add('hidden');$('#groupInfo').hidden=true;$('#mainContent').innerHTML=(d.contacts||[]).map(u=>`<button class="item" data-contact="${esc(u.username)}"><div class="avatar">${esc(u.username[0].toUpperCase())}</div><div class="itemtext"><b>${esc(u.display_name)}</b><small>@${esc(u.username)}</small></div></button>`).join('')||'<div class="empty">هنوز مخاطبی ندارید.</div>';document.querySelectorAll('[data-contact]').forEach(b=>b.onclick=async()=>{try{const x=await api('/api/chats/private',{method:'POST',body:{username:b.dataset.contact}});await loadChats();openChat(x.chat_id)}catch(e){toast(e.message)}})}catch(e){toast(e.message)}}
+async function showProfile(){
+ try{
+  const d=await api('/api/me');
+  $('#mainTitle').textContent='پروفایل';$('#mainSub').textContent='حساب و هویت دیجیتال';$('#composer').classList.add('hidden');$('#groupInfo').hidden=true;
+  const p=d.profile||{},u=d.user||{},name=p.display_name||u.username||'کاربر';
+  const phone=u.phone||p.phone||'',publicId=u.groot_id||p.groot_id||u.public_id||p.public_id||'';
+  $('#mainContent').innerHTML=`<div class="profile-page">
+   <div class="profile-top-actions"><button class="top-icon" id="profileMore" aria-label="گزینه‌های بیشتر">⋮</button><span class="profile-kicker">حساب کاربری</span><button class="top-icon" id="profileSearch" aria-label="جست‌وجو">⌕</button></div>
+   <div class="profile-hero"><div class="profile-avatar">${esc(Array.from(name)[0]||'G')}</div><h2>${esc(name)}</h2><p class="online-label"><i class="online-dot"></i> آنلاین</p><div class="profile-actions"><button class="profile-action" id="editProfileJump"><span>✎</span><b>ویرایش اطلاعات</b></button><button class="profile-action" id="profileSettings"><span>⚙</span><b>تنظیمات</b></button></div></div>
+   <div class="profile-info-card">${phone?`<div class="profile-field"><strong dir="ltr">${esc(phone)}</strong><small>شماره تلفن</small></div>`:''}<div class="profile-field"><strong dir="ltr">@${esc(u.username||'')}</strong><small>نام کاربری</small></div>${publicId?`<div class="profile-field"><strong dir="ltr">${esc(publicId)}</strong><small>GROOT ID</small></div>`:''}<div class="profile-field"><strong>${esc(p.bio||'هنوز توضیحی ثبت نشده است')}</strong><small>درباره من</small></div></div>
+   <div class="profile-edit-card hidden" id="profileEditor"><h3>ویرایش اطلاعات</h3><label class="field">نام نمایشی<input id="displayName" maxlength="60" value="${esc(name)}"></label><label class="field">بیوگرافی<textarea id="bio" maxlength="160" rows="3">${esc(p.bio||'')}</textarea></label><button class="btn" id="saveProfile">ذخیره تغییرات</button></div>
+   <div class="profile-footnote">اطلاعات این صفحه از حساب کاربری شما دریافت می‌شود.</div>
+  </div>`;
+  $('#editProfileJump').onclick=()=>{$('#profileEditor').classList.remove('hidden');$('#profileEditor').scrollIntoView({behavior:'smooth',block:'center'})};
+  $('#profileSettings').onclick=()=>view('settings');
+  $('#saveProfile').onclick=async()=>{try{await api('/api/profile',{method:'PATCH',body:{display_name:$('#displayName').value,bio:$('#bio').value}});toast('پروفایل ذخیره شد');showProfile()}catch(e){toast(e.message)}};
+  $('#profileMore').onclick=()=>{modal('گزینه‌های پروفایل',`<button class="item" id="profileEditMenu">ویرایش اطلاعات</button><button class="item" id="profileSettingsMenu">تنظیمات حساب</button>`);$('#profileEditMenu').onclick=()=>{closeModal();$('#profileEditor').classList.remove('hidden');$('#profileEditor').scrollIntoView({behavior:'smooth',block:'center'})};$('#profileSettingsMenu').onclick=()=>{closeModal();view('settings')}};
+  $('#profileSearch').onclick=()=>{view('list');setTimeout(()=>$('#chatSearch').focus(),80)};
+ }catch(e){toast(e.message)}
+}
+function showNotes(){
+ $('#mainTitle').textContent='GROOT NOTES';$('#mainSub').textContent='یادداشت‌های ذخیره‌شده روی این دستگاه';$('#composer').classList.add('hidden');$('#groupInfo').hidden=true;
+ const render=()=>{const q=($('#noteSearch')?.value||'').trim().toLowerCase();const list=state.notes.filter(n=>(n.title+' '+n.body).toLowerCase().includes(q));$('#notesList').innerHTML=list.length?list.map(n=>`<article class="card" data-note="${esc(n.id)}"><div class="row" style="justify-content:space-between"><b>${esc(n.title||'بدون عنوان')}</b><button class="iconbtn" data-del-note="${esc(n.id)}" title="حذف">✕</button></div><p style="white-space:pre-wrap;overflow-wrap:anywhere">${esc(n.body)}</p><small class="muted">${new Date(n.updated).toLocaleString('fa-IR')}</small><button class="btn secondary" data-edit-note="${esc(n.id)}" style="margin-right:8px">ویرایش</button></article>`).join(''):'<div class="empty">یادداشتی وجود ندارد.</div>';document.querySelectorAll('[data-del-note]').forEach(b=>b.onclick=()=>{state.notes=state.notes.filter(n=>n.id!==b.dataset.delNote);saveNotes();render()});document.querySelectorAll('[data-edit-note]').forEach(b=>b.onclick=()=>editNote(b.dataset.editNote))};
+ $('#mainContent').innerHTML=`<div class="panel"><div class="row"><input id="noteSearch" placeholder="جست‌وجوی یادداشت‌ها"><button class="btn" id="addNote">یادداشت جدید +</button></div><div class="notice">این نسخه یادداشت‌ها را فعلاً فقط روی همین دستگاه نگه می‌دارد؛ همگام‌سازی ابری تا اضافه‌شدن API یادداشت‌ها فعال نیست.</div><div id="notesList"></div></div>`;
+ $('#noteSearch').oninput=render;$('#addNote').onclick=()=>editNote(null);render();
+}
+function saveNotes(){localStorage.setItem('groot.notes',JSON.stringify(state.notes))}
+function editNote(id){const n=state.notes.find(x=>x.id===id)||{title:'',body:''};modal(id?'ویرایش یادداشت':'یادداشت جدید',`<label class="field">عنوان<input id="noteTitle" maxlength="100" value="${esc(n.title)}"></label><label class="field">متن یادداشت<textarea id="noteBody" rows="8" maxlength="20000">${esc(n.body)}</textarea></label><button class="btn" id="saveNote">ذخیره</button>`);$('#saveNote').onclick=()=>{const title=$('#noteTitle').value.trim(),body=$('#noteBody').value.trim();if(!title&&!body){toast('یادداشت خالی ذخیره نمی‌شود');return}if(id){Object.assign(n,{title,body,updated:Date.now()})}else{state.notes.unshift({id:crypto.randomUUID(),title,body,updated:Date.now()})}saveNotes();closeModal();showNotes();toast('یادداشت روی این دستگاه ذخیره شد')}}
+function showSpace(){$('#mainTitle').textContent='GROOT SPACE';$('#mainSub').textContent='فضای ذخیره‌سازی شخصی';$('#composer').classList.add('hidden');$('#groupInfo').hidden=true;$('#mainContent').innerHTML=`<div class="panel"><div class="card"><h3>فضای فایل‌های شخصی</h3><p class="muted">معماری ذخیره‌سازی این بخش با Cloudflare R2 طراحی شده است.</p><div class="notice">R2 هنوز روی حساب Cloudflare فعال نشده است؛ درخواست ساخت Bucket با خطای فعال‌سازی R2 برگشت. بنابراین فعلاً آپلود و دانلود ابری را فعال نمی‌کنم تا دکمه‌های نمایشی و بی‌استفاده تحویلت ندهم.</div></div><div class="card"><h3>قابلیت‌های در صف اتصال</h3><ul><li>آپلود عکس، ویدیو، صوت و اسناد</li><li>ساخت پوشه و دسته‌بندی فایل‌ها</li><li>تغییر نام، جابه‌جایی و حذف</li><li>جست‌وجو و دانلود امن</li><li>نمایش حجم مصرف‌شده و ظرفیت باقی‌مانده</li></ul></div></div>`}
+function showSettings(){
+ $('#mainTitle').textContent='تنظیمات';$('#mainSub').textContent='مدیریت حساب و برنامه';$('#composer').classList.add('hidden');$('#groupInfo').hidden=true;
+ const rows=[
+  ['◉','حساب کاربری','شماره، نام کاربری، بیوگرافی','profile','blue'],
+  ['☷','تنظیمات گفتگو','پس‌زمینه، حالت شب، انیمیشن‌ها','chatprefs','orange'],
+  ['⚿','حریم خصوصی و امنیت','آخرین بازدید، دستگاه‌ها، کلیدهای عبور','security','green'],
+  ['◖','اعلان‌ها','صداها، تماس‌ها، نشانگرها','notifications','red'],
+  ['◧','داده‌ها و ذخیره‌سازی','تنظیمات دانلود رسانه','storage','indigo'],
+  ['▰','پوشه‌های گفتگو','مرتب‌سازی گفتگوها در پوشه‌ها','folders','cyan'],
+  ['▣','دستگاه‌ها','مدیریت دستگاه‌های متصل','devices','teal'],
+  ['▤','GROOT SPACE','فضای ذخیره‌سازی شخصی','space','blue'],
+  ['▧','GROOT NOTES','دفترچه یادداشت','notes','purple'],
+  ['文','زبان','زبان رابط کاربری','language','violet']
+ ];
+ $('#mainContent').innerHTML=`<div class="settings-page"><div class="settings-topbar"><span class="topbar-qr">▦</span><b>تنظیمات</b><button class="top-icon" id="settingsMore">⋮</button></div><div class="settings-account-head"><div class="settings-account-avatar">${esc(Array.from((state.user?.username||'G'))[0]||'G')}</div><div><b>${esc(state.user?.display_name||state.user?.username||'حساب کاربری')}</b><small dir="ltr">@${esc(state.user?.username||'')}</small></div></div><div class="settings-card">${rows.map(([ic,title,desc,key,color])=>`<button class="setting-item" data-setting="${key}"><span class="setting-icon ${color}">${ic}</span><span class="setting-copy"><b>${title}</b><small>${desc}</small></span><span class="setting-chevron">‹</span></button>`).join('')}</div><div class="settings-bottom"><button class="logout-row" id="logoutBtn">خروج از حساب</button><small>GROOT CHAT · نسخه آزمایشی</small></div></div>`;
+ $('#logoutBtn').onclick=logout;$('#settingsMore').onclick=()=>modal('تنظیمات',`<p class="muted">مدیریت تنظیمات حساب و برنامه</p><button class="item" id="settingsLogout">خروج از حساب</button>`);setTimeout(()=>{const b=$('#settingsLogout');if(b)b.onclick=()=>{closeModal();logout()}},0);
+ document.querySelectorAll('[data-setting]').forEach(b=>b.onclick=()=>{
+  const key=b.dataset.setting;
+  if(key==='profile')return view('profile');
+  if(key==='space')return view('space');
+  if(key==='notes')return view('notes');
+  if(key==='chatprefs')return openAppearanceSettings();
+  if(key==='security'||key==='devices')return toast('مدیریت نشست‌ها و دستگاه‌ها هنوز به API نیاز دارد');
+  if(key==='notifications')return toast('تنظیمات اعلان‌ها در مرحله بعد اضافه می‌شود');
+  if(key==='storage')return view('space');
+  if(key==='folders')return toast('مدیریت پوشه‌های گفتگو هنوز پیاده‌سازی نشده است');
+  if(key==='language')return toast('فعلاً زبان فارسی فعال است');
+ });
+}
+function openAppearanceSettings(){
+ const a=appearance;
+ modal('شخصی‌سازی ظاهر',`<div class="settings-modal appearance-controls">
+  <label class="field">رنگ اصلی رابط<select id="accent"><option value="#2799dc">آبی</option><option value="#8b5cf6">بنفش</option><option value="#31a66b">سبز</option><option value="#e36a86">صورتی</option><option value="#e39a32">نارنجی</option><option value="#202a44">سرمه‌ای</option></select></label>
+  <label class="field">حالت نمایش<select id="themeMode"><option value="light">روشن</option><option value="dark">تیره</option></select></label>
+  <label class="field">پس‌زمینه برنامه<select id="wallpaper"><option value="plain">خاکستری روشن</option><option value="sky">آبی ملایم</option><option value="lavender">یاسی</option><option value="mint">سبز ملایم</option></select></label>
+  <label class="field range-field"><span>شفافیت پنل‌ها <b id="opacityValue"></b></span><input id="glassOpacity" type="range" min="30" max="95" step="5"></label>
+  <label class="field range-field"><span>شدت محوشدگی شیشه <b id="blurValue"></b></span><input id="glassBlur" type="range" min="6" max="40" step="2"></label>
+  <label class="field range-field"><span>اندازه نوشته <b id="fontValue"></b></span><input id="fontSize" type="range" min="12" max="19" step="1"></label>
+  <label class="field range-field"><span>گردی گوشه‌ها <b id="radiusValue"></b></span><input id="cornerRadius" type="range" min="12" max="34" step="2"></label>
+  <label class="field">تراکم رابط<select id="density"><option value="normal">معمولی</option><option value="compact">فشرده</option></select></label>
+  <label class="checkrow">انیمیشن‌های رابط فعال باشند<input id="motion" type="checkbox" checked></label>
+  <div class="appearance-preview"><span>پیش‌نمایش</span><div class="preview-glass">GROOT CHAT <small>پنل شیشه‌ای</small></div></div>
+  <button class="btn" id="saveAppearance">ذخیره شخصی‌سازی</button>
+ </div>`);
+ $('#accent').value=a.accent;$('#themeMode').value=a.theme;$('#wallpaper').value=a.wallpaper;$('#glassOpacity').value=a.opacity;$('#glassBlur').value=a.blur;$('#fontSize').value=a.font;$('#cornerRadius').value=a.radius;$('#density').value=a.density;$('#motion').checked=a.motion!==false;
+ const updateLabels=()=>{$('#opacityValue').textContent=$('#glassOpacity').value+'٪';$('#blurValue').textContent=$('#glassBlur').value+'px';$('#fontValue').textContent=$('#fontSize').value+'px';$('#radiusValue').textContent=$('#cornerRadius').value+'px'};
+ ['glassOpacity','glassBlur','fontSize','cornerRadius'].forEach(id=>$('#'+id).oninput=updateLabels);updateLabels();
+ $('#saveAppearance').onclick=()=>{
+  appearance={accent:$('#accent').value,theme:$('#themeMode').value,wallpaper:$('#wallpaper').value,opacity:+$('#glassOpacity').value,blur:+$('#glassBlur').value,font:+$('#fontSize').value,radius:+$('#cornerRadius').value,density:$('#density').value,motion:$('#motion').checked};
+  applyAppearance();closeModal();toast('شخصی‌سازی ذخیره شد');
+ };
+}
+
+function logout(){clearInterval(state.poll);try{api('/api/logout',{method:'POST'})}catch{}state.token='';state.user=null;state.active=null;appHistoryReady=false;localStorage.removeItem('groot.token');$('#modalRoot').innerHTML='';$('#app').classList.add('hidden');$('#auth').classList.remove('hidden');authMode('login');try{history.replaceState(null,'',location.pathname+location.search)}catch{}}
+$('#app').addEventListener('click',e=>{if(e.target.closest('[data-view="list"]')){}});
+(async()=>{if(state.token){try{await startApp()}catch(e){localStorage.removeItem('groot.token');state.token='';$('#auth').classList.remove('hidden');$('#app').classList.add('hidden')}}})();
+</script>
+</body></html>
